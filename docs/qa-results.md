@@ -7,15 +7,16 @@ Test date: 2026-10-07 (Asia/Shanghai). This file records executed checks and doe
 - Dependency installation: **passed** with the locked `package-lock.json` using Node 22-compatible dependencies.
 - Production build: **passed** with Vinext 1.0.0-beta.5, Next.js 16.3.4 and Vite 8.0.13.
 - ESLint: **passed** with no reported errors or warnings.
-- Hosted packaging: **passed**; source pushed at commit `3cf2e506eb3cdc95c21f157c54d402b8db8a9bae` and deployment version 1 succeeded.
+- Hosted packaging and private deployment: **passed** through the Sites release workflow; immutable commit and version details remain available in the project deployment history.
 - HTTP route check: **passed** for all 11 intended pages and `robots.txt`; the test unknown path returned HTTP 404.
 
 ## Browser checks
 
 - 390px, 768px and 1440px: **passed** across all 11 routes. Browser audit found one H1 per page, zero empty links and no horizontal overflow.
-- English and Chinese document language: **passed** (`en` and `zh-Hans` respectively).
+- English and Traditional Chinese document language: **passed** (`en` and `zh-Hant-HK` respectively).
+- Traditional Chinese localisation: **passed** for Hong Kong-facing terminology, `zh-Hant` reciprocal hreflang, `zh_HK` Open Graph locale, language switch labels and Traditional Chinese metadata.
 - Page-specific title and `noindex, nofollow, noarchive`: **passed** across every route.
-- English and Chinese purchasing paths: **passed** for home → product → guide → RFQ.
+- English and Traditional Chinese purchasing paths: **passed** for home → product → guide → RFQ.
 - Language switch: **passed**, including preservation of product, application and guide-topic parameters on RFQ links.
 - Guide table of contents: **passed** with 12 mobile/desktop entries pointing to the correct local IDs. Smooth-scroll landing remained below the sticky header.
 - RFQ required fields: **passed**; invalid submission showed three required-field errors while preserving the selected product and application.

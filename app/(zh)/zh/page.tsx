@@ -1,4 +1,4 @@
 import { HomePage } from "@/components/site-pages/home-page";
 import { metadataFor } from "@/lib/site";
-export const metadata = metadataFor("定制按键与橡胶组件｜岩泉", "浏览硅胶按键、薄膜按键、橡胶零件、真实工序照片与实用设计资料。", "/", "zh");
+export const metadata = metadataFor("訂製按鍵與橡膠組件｜岩泉", "瀏覽矽膠按鍵、薄膜按鍵、橡膠零件、真實工序照片與實用設計資料。", "/", "zh");
 export default function Page(){ return <HomePage lang="zh"/>; }

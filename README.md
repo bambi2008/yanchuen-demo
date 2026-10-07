@@ -23,7 +23,7 @@ npm run start
 
 ## Routes
 
-| English | Simplified Chinese | Purpose |
+| English | Traditional Chinese (Hong Kong) | Purpose |
 | --- | --- | --- |
 | `/` | `/zh` | Homepage and product entry points |
 | `/products` | `/zh/products` | Verified product range |

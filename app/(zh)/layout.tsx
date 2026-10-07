@@ -6,7 +6,7 @@ export const metadata: Metadata = baseMetadata;
 
 export default function ChineseLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh-Hans">
+    <html lang="zh-Hant-HK">
       <body>{children}</body>
     </html>
   );

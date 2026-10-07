@@ -12,13 +12,13 @@ export const pageCopy = {
     manufacturing: "Manufacturing",
     about: "About",
     rfq: "Request a quote",
-    language: "中文",
+    language: "繁中",
   },
   zh: {
-    products: "产品",
-    guide: "设计指南",
-    manufacturing: "生产工序",
-    about: "关于岩泉",
+    products: "產品",
+    guide: "設計指南",
+    manufacturing: "生產工序",
+    about: "關於岩泉",
     rfq: "提交需求",
     language: "EN",
   },
@@ -50,7 +50,7 @@ export function metadataFor(
       canonical: url,
       languages: {
         en: `${siteOrigin}${path}`,
-        "zh-Hans": `${siteOrigin}${path === "/" ? "/zh" : `/zh${path}`}`,
+        "zh-Hant": `${siteOrigin}${path === "/" ? "/zh" : `/zh${path}`}`,
       },
     },
     openGraph: {
@@ -59,13 +59,13 @@ export function metadataFor(
       description,
       url,
       siteName: "Yan Chuen",
-      locale: lang === "en" ? "en_US" : "zh_CN",
+      locale: lang === "en" ? "en_US" : "zh_HK",
       images: [
         {
           url: "/assets/hero-keypad-collection.webp",
           width: 1600,
           height: 673,
-          alt: lang === "en" ? "Yan Chuen keypad samples" : "岩泉按键样品",
+          alt: lang === "en" ? "Yan Chuen keypad samples" : "岩泉按鍵樣品",
         },
       ],
     },
