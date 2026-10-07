@@ -35,9 +35,11 @@ export function SiteShell({ lang, path, children, quietNav = false }: ShellProps
               <Link href={localPath(lang, "/design-guides/silicone-rubber-keypad")}>{t.guide}</Link>
               <Link href={`${localPath(lang)}#manufacturing`}>{t.manufacturing}</Link>
               <Link href={localPath(lang, "/about")}>{t.about}</Link>
+              <Link href={localPath(lang, "/contact")}>{t.contact}</Link>
             </nav>
           )}
           <div className="header-actions">
+            {path === "/" && <Link className="admin-demo-link" href="/admin">{t.admin}</Link>}
             <Link className="language-link" href={otherLanguagePath(lang, path)} hrefLang={isZh ? "en" : "zh-Hant"}>
               {t.language}
             </Link>
@@ -51,10 +53,12 @@ export function SiteShell({ lang, path, children, quietNav = false }: ShellProps
             <details className="mobile-menu">
               <summary aria-label={isZh ? "打開導航" : "Open navigation"}><Menu size={23} /></summary>
               <nav>
+                {path === "/" && <Link href="/admin">{t.admin}</Link>}
                 <Link href={localPath(lang, "/products")}>{t.products}</Link>
                 <Link href={localPath(lang, "/design-guides/silicone-rubber-keypad")}>{t.guide}</Link>
                 <Link href={`${localPath(lang)}#manufacturing`}>{t.manufacturing}</Link>
                 <Link href={localPath(lang, "/about")}>{t.about}</Link>
+                <Link href={localPath(lang, "/contact")}>{t.contact}</Link>
                 <Link href={localPath(lang, "/request-a-quote")}>{t.rfq}</Link>
               </nav>
             </details>
@@ -89,9 +93,10 @@ function Footer({ lang }: { lang: Lang }) {
         <div>
           <h2>{isZh ? "香港聯絡資料" : "Hong Kong contact"}</h2>
           <p>Yan Chuen Co., Ltd.</p>
-          <p>Flat 1404, 14/F, Fo Tan Industrial Centre<br />26 Au Pui Wan Street, Fo Tan, Hong Kong</p>
+          <p>Flat 1404, 14/F, Fo Tan Industrial Centre<br />26–28 Au Pui Wan Street, Fo Tan, Hong Kong</p>
           <a href="mailto:sales@yanchuen.com">sales@yanchuen.com</a>
           <a href="tel:+85226885011">+852 2688 5011</a>
+          <Link href={localPath(lang, "/contact")}>{isZh ? "查看完整聯絡方式 →" : "View all contact options →"}</Link>
         </div>
       </div>
       <div className="shell footer-bottom">

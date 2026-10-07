@@ -49,7 +49,7 @@
       "sourceUrl": "https://sourcing.hktdc.com/en/Supplier-Store/Profile/Yan-Chuen-Co-Ltd/1X0008MQ",
       "status": "public-source",
       "evidence": "HKTDC supplier profile lists Yan Chuen Co., Ltd. as established in 1992 and serving export markets.",
-      "use": ["/#about", "/zh#about"],
+      "use": ["/about", "/zh/about"],
       "boundary": "Public-record context only; no customer count, export share or market-share calculation."
     },
     {
@@ -57,8 +57,75 @@
       "sourceUrl": "https://www.activecomponents.com/articles/news/1104",
       "status": "public-source",
       "evidence": "Active Components published a Yan Chuen custom keypad and overlay introduction dated 2024-06-27.",
-      "use": ["/#about", "/zh#about"],
+      "use": ["/about", "/zh/about"],
       "boundary": "Presented as industry/channel coverage, not a testimonial or proof of a customer relationship."
+    },
+    {
+      "id": "fact-hktdc-profile-current",
+      "sourceUrl": "https://sourcing.hktdc.com/en/Supplier-Store/Company-Verification/Yan-Chuen-Co-Ltd/1X0008MQ",
+      "status": "public-source",
+      "evidence": "HKTDC lists Yan Chuen as a Hong Kong exporter and manufacturer, with supplier information updated 2025-11-10 and advertising with HKTDC since 1996-09-01.",
+      "use": ["/about", "/zh/about"],
+      "boundary": "HKTDC profile fields only; not proof of current capacity, quality performance or customer relationships."
+    },
+    {
+      "id": "fact-fair-2025",
+      "sourceUrl": "https://www.hktdc.com/event/electronicasia/wp-content/uploads/sites/25/2025/10/electronicAsia-2025-Fair-Catalogue.pdf",
+      "status": "public-source",
+      "evidence": "The HKTDC electronicAsia 2025 fair catalogue lists Yan Chuen Company Limited at booth 5B-A01 and names keypad and rubber-component product categories.",
+      "use": ["/about", "/zh/about"],
+      "boundary": "Trade-fair listing only; no sales, award or customer endorsement is inferred."
+    },
+    {
+      "id": "fact-trade-shows-2023-2026",
+      "sourceUrl": "https://www.yanchuen.com/general-5",
+      "secondaryUrl": "https://www.hktdc.com/event/electronicasia/en/exhibitor-list",
+      "status": "public-source",
+      "evidence": "Yan Chuen's Trade Shows page lists electronicAsia in 2023 (5B-A01), 2024 (5B-A03), 2025 (5B-A01) and the upcoming 13-16 October 2026 event (5B-A01). The current HKTDC exhibitor list independently confirms Yan Chuen Company Limited at 5B-A01 for electronicAsia 2026.",
+      "use": ["/about", "/zh/about"],
+      "boundary": "Confirmed event listing and booth only; attendance outcomes, visitor counts, meetings or sales are not inferred."
+    },
+    {
+      "id": "fact-factory-tour-gallery",
+      "sourceUrl": "https://www.yanchuen.com/projects-2",
+      "status": "public-source",
+      "evidence": "The public Factory Tour provides named photographs for rubber mixing, LIM, coating, laser etching, tooling, compression molding, printing, oven and epoxy work, plus membrane printing, PET placement, die-cutting, lamination, embossing and punching.",
+      "use": ["/#manufacturing", "/zh#manufacturing"],
+      "boundary": "Public-site process imagery only. Current equipment status, ownership, operating relationship, dates and certification scope require client confirmation."
+    },
+    {
+      "id": "fact-certification-claims",
+      "sourceUrl": "https://www.yanchuen.com/",
+      "status": "needs-client-confirmation",
+      "evidence": "The official site displays ISO 9001 / IATF 16949, ISO 14001 and ISO 13485 claims.",
+      "use": ["/about", "/zh/about"],
+      "boundary": "Current certificates, legal entity, facility, product and scope must be verified before reliance or public certification badges are added."
+    },
+    {
+      "id": "fact-contact",
+      "sourceUrl": "https://www.yanchuen.com/",
+      "secondaryUrl": "https://www.hktdc.com/event/electronicasia/wp-content/uploads/sites/25/2025/10/electronicAsia-2025-Fair-Catalogue.pdf",
+      "status": "public-source",
+      "evidence": "The official site and 2025 HKTDC fair catalogue list sales@yanchuen.com, +852 2688 5011, fax +852 2688 5625 and Flat 1404, 14/F, Fo Tan Industrial Centre, 26-28 Au Pui Wan Street, Fo Tan, Hong Kong.",
+      "use": ["/contact", "/zh/contact"],
+      "boundary": "No public source confirms that the phone number is WhatsApp-enabled; the WhatsApp link remains a labelled demo placeholder until client confirmation."
+    },
+    {
+      "id": "fact-customer-testimonials",
+      "sourceUrl": "research://public-search-2026-10-07",
+      "status": "needs-client-confirmation",
+      "evidence": "No attributable, customer-approved public testimonial quote was identified during the dated research pass.",
+      "use": ["/", "/zh"],
+      "boundary": "Homepage testimonial cards are explicitly labelled sample copy and must be replaced with approved customer wording, attribution and permission before launch."
+    },
+    {
+      "id": "audit-original-wix-analytics",
+      "sourceUrl": "https://www.yanchuen.com/",
+      "secondaryUrl": "https://support.wix.com/en/article/wix-forms-managing-your-forms-from-the-dashboard",
+      "status": "needs-client-confirmation",
+      "evidence": "The public original site uses Wix-hosted resources and contains English and Chinese inquiry forms. Wix documents built-in Analytics and Forms & Submissions reporting.",
+      "use": ["/admin"],
+      "boundary": "The public frontend cannot confirm private account access, historical data, notification rules, consent configuration or connected third-party analytics. The admin page currently uses labelled sample data only."
     },
     {
       "id": "audit-public-site-20261006",
