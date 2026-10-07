@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/site-link";
 import { ArrowRight, CircleCheck, Eye } from "lucide-react";
 import { Eyebrow, SiteShell } from "@/components/site-shell";
 import { metadataFor, siteOrigin } from "@/lib/site";

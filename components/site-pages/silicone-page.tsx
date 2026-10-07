@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/site-link";
 import { ArrowRight, Check } from "lucide-react";
 import { Lang, localPath } from "@/lib/site";
 import { Breadcrumbs, CtaBand, Eyebrow, SiteShell } from "@/components/site-shell";

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/site-link";
 import { ArrowUpRight, Menu } from "lucide-react";
 import { Lang, localPath, otherLanguagePath, pageCopy } from "@/lib/site";
 

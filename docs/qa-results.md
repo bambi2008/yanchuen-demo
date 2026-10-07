@@ -17,7 +17,7 @@ Test date: 2026-10-07 (Asia/Shanghai). This file records executed checks and doe
 - Traditional Chinese localisation: **passed** for Hong Kong-facing terminology, `zh-Hant` reciprocal hreflang, `zh_HK` Open Graph locale, language switch labels and Traditional Chinese metadata.
 - Page-specific title and `noindex, nofollow, noarchive`: **passed** across every route.
 - English and Traditional Chinese purchasing paths: **passed** for home → product → guide → RFQ.
-- Language switch: **passed**, including preservation of product, application and guide-topic parameters on RFQ links.
+- Language switch: **passed** in both directions using native document navigation, including preservation of product, application and guide-topic parameters on RFQ links. This avoids the current Vinext client-side `Link` runtime failure.
 - Guide table of contents: **passed** with 12 mobile/desktop entries pointing to the correct local IDs. Smooth-scroll landing remained below the sticky header.
 - RFQ required fields: **passed**; invalid submission showed three required-field errors while preserving the selected product and application.
 - RFQ attachments: **passed** for invalid type, over-10MB rejection, valid JPG selection, removal and re-selection.
