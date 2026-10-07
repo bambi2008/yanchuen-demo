@@ -21,19 +21,13 @@ export function SiteShell({ lang, path, children, quietNav = false }: ShellProps
           </a>
         <div className="shell header-inner">
           <Link className="brand" href={localPath(lang)} aria-label={isZh ? "岩泉首頁" : "Yan Chuen home"}>
-            <span className="brand-plaque">
-              <Image
-                src="/assets/yan-chuen-logo.webp"
-                alt="Yan Chuen Co., Ltd."
-                width={318}
-                height={65}
-                priority
-              />
-            </span>
-            <span className="brand-context" aria-hidden="true">
-              <span>Hong Kong</span>
-              <strong>Since 1992</strong>
-            </span>
+            <Image
+              src="/assets/yan-chuen-logo.webp"
+              alt="Yan Chuen Co., Ltd."
+              width={318}
+              height={65}
+              priority
+            />
           </Link>
           {!quietNav && (
             <nav aria-label={isZh ? "主導航" : "Primary navigation"} className="desktop-nav">
