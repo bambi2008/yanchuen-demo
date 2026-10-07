@@ -34,7 +34,7 @@ export function SiteShell({ lang, path, children, quietNav = false }: ShellProps
               <Link href={localPath(lang, "/products")}>{t.products}</Link>
               <Link href={localPath(lang, "/design-guides/silicone-rubber-keypad")}>{t.guide}</Link>
               <Link href={`${localPath(lang)}#manufacturing`}>{t.manufacturing}</Link>
-              <Link href={`${localPath(lang)}#about`}>{t.about}</Link>
+              <Link href={localPath(lang, "/about")}>{t.about}</Link>
             </nav>
           )}
           <div className="header-actions">
@@ -54,7 +54,7 @@ export function SiteShell({ lang, path, children, quietNav = false }: ShellProps
                 <Link href={localPath(lang, "/products")}>{t.products}</Link>
                 <Link href={localPath(lang, "/design-guides/silicone-rubber-keypad")}>{t.guide}</Link>
                 <Link href={`${localPath(lang)}#manufacturing`}>{t.manufacturing}</Link>
-                <Link href={`${localPath(lang)}#about`}>{t.about}</Link>
+                <Link href={localPath(lang, "/about")}>{t.about}</Link>
                 <Link href={localPath(lang, "/request-a-quote")}>{t.rfq}</Link>
               </nav>
             </details>

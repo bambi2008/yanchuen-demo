@@ -15,6 +15,7 @@ Test date: 2026-10-07 (Asia/Shanghai). This file records executed checks and doe
 - 390px, 768px and 1440px: **passed** across all 11 routes. Browser audit found one H1 per page, zero empty links and no horizontal overflow.
 - Header brand lockup: **passed** at desktop and 390px mobile widths. The original logo asset and lettering remain unchanged; the logo is placed directly in the header without a frame, accent rail, shadow, or supporting label.
 - Display-heading typography: **passed** on the Traditional Chinese home and request pages at desktop and 390px mobile widths. Reduced scale, looser leading, softer tracking, and balanced wrapping remove cramped or orphaned lines.
+- Home information architecture: **passed**. Company-history and channel-coverage cards were removed from the homepage flow and moved to dedicated `/about` and `/zh/about` pages; desktop and mobile About links no longer use an in-page manufacturing-adjacent anchor.
 - English and Traditional Chinese document language: **passed** (`en` and `zh-Hant-HK` respectively).
 - Traditional Chinese localisation: **passed** for Hong Kong-facing terminology, `zh-Hant` reciprocal hreflang, `zh_HK` Open Graph locale, language switch labels and Traditional Chinese metadata.
 - Page-specific title and `noindex, nofollow, noarchive`: **passed** across every route.

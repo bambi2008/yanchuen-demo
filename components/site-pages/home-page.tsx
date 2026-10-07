@@ -27,12 +27,6 @@ const copy = {
     manufacturingLead: "Yan Chuen's public site identifies rubber production facilities in Wan’an, Jiangxi and membrane production facilities in Huangjiang, Dongguan. Facility ownership and certification scope require client confirmation.",
     engineeringTitle: "Turn reference drawings into a working design conversation",
     engineeringBody: "The original site already contains useful construction, conductive-contact, artwork and force/stroke references. This demo makes them readable, searchable and correctly linked to the silicone-keypad topic.",
-    history: "Company record",
-    historyTitle: "A Hong Kong company profile with a documented history",
-    historyBody: "The Hong Kong Trade Development Council supplier profile lists Yan Chuen Co., Ltd. as established in 1992 and serving export markets. This demo treats those facts as public-record context—not a claim about customer count or market share.",
-    channel: "Industry & channel coverage",
-    channelTitle: "A traceable 2024 product introduction",
-    channelBody: "Active Components published an article on 27 June 2024 introducing Yan Chuen custom keypads and overlays. It is presented as independent channel coverage, not as a customer testimonial.",
   },
   zh: {
     eyebrow: "香港 · 訂製輸入組件",
@@ -56,12 +50,6 @@ const copy = {
     manufacturingLead: "岩泉公開網站列出江西萬安橡膠生產設施與東莞黃江薄膜生產設施。設施權屬與認證範圍仍需由甲方確認。",
     engineeringTitle: "把參考圖變成可用的設計溝通",
     engineeringBody: "原站已有結構、導電設計、圖稿及力與行程等資料。本 Demo 將它們整理成可閱讀、可定位、且正確關聯矽膠按鍵主題的工程指南。",
-    history: "公司資料",
-    historyTitle: "有公開檔案可查核的香港公司歷史",
-    historyBody: "香港貿發局供應商檔案列明岩泉有限公司成立於 1992 年並面向出口市場。本 Demo 只按公開檔案表述，不延伸為客戶數量或市場份額。",
-    channel: "行業與渠道報導",
-    channelTitle: "一篇可追溯的 2024 年產品介紹",
-    channelBody: "Active Components 於 2024 年 6 月 27 日刊登文章，介紹岩泉的訂製按鍵與覆膜。這裡將其作為渠道報導，不包裝成客戶評價。",
   },
 } as const;
 
@@ -134,7 +122,6 @@ export function HomePage({ lang }: { lang: Lang }) {
 
       <section className="section section-white"><div className="shell engineering-feature"><div className="engineering-visual"><Image src="/assets/guide-construction.webp" alt={isZh ? "矽膠按鍵基本結構參考圖" : "Reference illustration of silicone keypad construction"} width={981} height={828}/></div><div className="engineering-copy"><Eyebrow>{isZh ? "設計資料" : "Design reference"}</Eyebrow><h2>{t.engineeringTitle}</h2><p>{t.engineeringBody}</p><ul className="check-list">{(isZh ? ["本頁正確章節錨點，不再誤連薄膜指南","保留原始技術圖，正文可選擇與閱讀","每節說明買家應準備的項目資料"] : ["Correct in-page anchors for the silicone guide","Original diagrams paired with selectable text","A practical preparation prompt in every section"]).map(i => <li key={i}><Check size={18}/><span>{i}</span></li>)}</ul><Link className="button" href={localPath(lang,"/design-guides/silicone-rubber-keypad")}>{isZh ? "進入矽膠設計指南" : "Open the silicone design guide"}<ArrowRight size={16}/></Link></div></div></section>
 
-      <section id="about" className="section shell"><div className="section-head"><div><Eyebrow>{isZh ? "可追溯的信任資訊" : "Traceable trust signals"}</Eyebrow><h2>{isZh ? "用來源代替口號" : "Use sources instead of slogans"}</h2></div><p>{isZh ? "只展示可從公司網站、平台檔案或報導核實的內容；未核實的認證範圍、客戶評價與增長數字不會出現在採購頁面。" : "Only information traceable to company pages, public profiles or published coverage appears here. Unverified certification scope, testimonials and growth claims stay out."}</p></div><div className="trust-grid"><article className="trust-card"><Eyebrow>{t.history}</Eyebrow><h3>{t.historyTitle}</h3><p>{t.historyBody}</p><a className="source" href="https://sourcing.hktdc.com/en/Supplier-Store/Profile/Yan-Chuen-Co-Ltd/1X0008MQ" target="_blank" rel="noreferrer">{isZh ? "來源：香港貿發局供應商檔案 ↗" : "Source: HKTDC supplier profile ↗"}</a></article><article className="trust-card"><Eyebrow>{t.channel}</Eyebrow><h3>{t.channelTitle}</h3><p>{t.channelBody}</p><a className="source" href="https://www.activecomponents.com/articles/news/1104" target="_blank" rel="noreferrer">{isZh ? "來源：Active Components 報導 ↗" : "Source: Active Components coverage ↗"}</a></article></div></section>
       <CtaBand lang={lang}/>
     </SiteShell>
   );
