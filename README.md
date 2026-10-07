@@ -2,6 +2,8 @@
 
 A private, bilingual B2B purchasing demo for Yan Chuen Co., Ltd. It turns verified public product, process and engineering material into a working path from product discovery to a local-only RFQ demonstration.
 
+Private owner preview: `https://yanchuen-demo.jose2026mao.chatgpt.site` (ChatGPT sign-in required).
+
 ## Run locally
 
 Requirements: Node.js 22.13 or newer.

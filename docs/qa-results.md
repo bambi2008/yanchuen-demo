@@ -1,26 +1,34 @@
 # QA results
 
-This file is updated from executed checks. It does not predeclare unrun tests as passing.
+Test date: 2026-10-07 (Asia/Shanghai). This file records executed checks and does not convert unavailable measurements into passing results.
 
 ## Automated checks
 
-- Dependency installation: pending final QA update.
-- Production build: pending final QA update.
-- ESLint: pending final QA update.
-- Internal-link and metadata audit: pending final QA update.
+- Dependency installation: **passed** with the locked `package-lock.json` using Node 22-compatible dependencies.
+- Production build: **passed** with Vinext 1.0.0-beta.5, Next.js 16.3.4 and Vite 8.0.13.
+- ESLint: **passed** with no reported errors or warnings.
+- Hosted packaging: **passed**; source pushed at commit `3cf2e506eb3cdc95c21f157c54d402b8db8a9bae` and deployment version 1 succeeded.
+- HTTP route check: **passed** for all 11 intended pages and `robots.txt`; the test unknown path returned HTTP 404.
 
 ## Browser checks
 
-- 390px, 768px and 1440px layouts: pending.
-- English path: home → silicone product → guide → RFQ: pending.
-- Chinese equivalent path and page-preserving language switches: pending.
-- Guide anchors and sticky/mobile contents: pending.
-- RFQ required fields, no-drawing flow, file validation, removal, preserved values and demo confirmation: pending.
-- 404 route: pending.
+- 390px, 768px and 1440px: **passed** across all 11 routes. Browser audit found one H1 per page, zero empty links and no horizontal overflow.
+- English and Chinese document language: **passed** (`en` and `zh-Hans` respectively).
+- Page-specific title and `noindex, nofollow, noarchive`: **passed** across every route.
+- English and Chinese purchasing paths: **passed** for home → product → guide → RFQ.
+- Language switch: **passed**, including preservation of product, application and guide-topic parameters on RFQ links.
+- Guide table of contents: **passed** with 12 mobile/desktop entries pointing to the correct local IDs. Smooth-scroll landing remained below the sticky header.
+- RFQ required fields: **passed**; invalid submission showed three required-field errors while preserving the selected product and application.
+- RFQ attachments: **passed** for invalid type, over-10MB rejection, valid JPG selection, removal and re-selection.
+- RFQ local demo submit: **passed** with fictional data, no drawing, double-submit protection and an on-page “nothing was sent” summary.
+- 404 route: **passed** visually and returned HTTP 404.
+- Screenshots: 1440px product and 390px Chinese-home screenshots were captured and visually inspected in the Codex browser session. The browser-control surface did not provide a local file export path.
 
 ## Performance
 
-Three-run mobile Lighthouse measurements for home, product and guide are pending. Results will only be entered with tool version, throttling, environment, date, each run, median and range.
+Three-run mobile Lighthouse 13.5.0 was attempted for home, product and guide against the locally built Worker. It is **unmeasured in this environment**: both installed Google Chrome 155.0.8059.39 and a clean temporary Chrome Headless Shell 155.0.8059.39 were blocked by the macOS execution sandbox while registering the Chromium Mach-port rendezvous service (`Permission denied (1100)`). All 10 attempted Lighthouse launches failed before navigation, so no scores or timings are reported. This is an environment limitation, not a substituted pass.
+
+For formal acceptance, rerun the documented 3× mobile matrix on an environment that permits headless Chromium. Use Lighthouse 13.5.0, RTT 150ms, throughput about 1,638.4Kbps, CPU slowdown 4×, cold cache and no login; record every run, median and range without rewriting failed results.
 
 ## Known production follow-ups
 
@@ -28,3 +36,4 @@ Three-run mobile Lighthouse measurements for home, product and guide are pending
 - Current certificate validity, legal entity and scope have not been verified.
 - Primary-domain and `.com.hk` migration decisions require historical data review.
 - The RFQ is intentionally local-only and has no receiving endpoint.
+- The private deployed URL requires the owner to continue with ChatGPT sign-in; public access was not enabled.
