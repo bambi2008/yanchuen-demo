@@ -116,6 +116,9 @@ export function HomePage({ lang }: { lang: Lang }) {
     [HeartPulse, isZh ? "醫療設備" : "Medical equipment", isZh ? "明確項目所需清潔、材料與合規要求，逐項確認。" : "State cleaning, material and compliance needs for project review.", "medical-equipment"],
     [RadioTower, isZh ? "電訊設備" : "Telecom equipment", isZh ? "說明介面配置、導電方式與使用環境。" : "Describe interface layout, contact method and operating environment.", "telecom"],
   ] as const;
+  const capabilities = isZh
+    ? [["多色基體","按項目確認顏色與結構"],["字樣與圖案","印刷、雕刻與圖稿準備"],["導電設計","導電膠粒與觸點形式"],["包膠組件","塑膠或金屬包膠樣本"],["表面處理","PU、滴膠與其他樣本"]]
+    : [["Multi-color bases","Confirm color and construction"],["Legends & graphics","Printing, engraving and artwork"],["Conductive design","Carbon pills and contact formats"],["Overmolded parts","Plastic or metal insert samples"],["Surface finishes","PU, epoxy and other samples"]];
   const rubberFactory = [
     ["/assets/factory-mixing.webp", isZh ? "材料混煉" : "Material mixing / blending"],
     ["/assets/factory-lim.webp", isZh ? "液態矽膠注射成型" : "Liquid injection molding"],
@@ -169,7 +172,11 @@ export function HomePage({ lang }: { lang: Lang }) {
         <div className="product-grid">{products.map((product) => <article className="product-card" key={product.title}><div className="image-wrap"><Image src={product.image} alt={product.alt} fill sizes="(max-width:720px) 100vw, 33vw" /></div><div className="card-copy"><h3>{product.title}</h3><p>{product.body}</p><Link className="text-link" href={product.href}>{product.cta}<ArrowRight size={15} /></Link></div></article>)}</div>
       </section>
 
-      <section className="capability-strip"><div className="shell capability-grid">{(isZh ? [["多色基體","按項目確認顏色與結構"],["字樣與圖案","印刷、雕刻與圖稿準備"],["導電設計","導電膠粒與觸點形式"],["包膠組件","塑膠或金屬包膠樣本"],["表面處理","PU、滴膠與其他樣本"]] : [["Multi-color bases","Confirm color and construction"],["Legends & graphics","Printing, engraving and artwork"],["Conductive design","Carbon pills and contact formats"],["Overmolded parts","Plastic or metal insert samples"],["Surface finishes","PU, epoxy and other samples"]]).map(([a,b]) => <div key={a}><strong>{a}</strong><span>{b}</span></div>)}</div></section>
+      <section className="capability-strip" aria-label={isZh ? "可討論的訂製方向" : "Customization topics"}>
+        <div className="capability-marquee">
+          {[0,1].map((set) => <div className="capability-grid" aria-hidden={set === 1} key={set}>{capabilities.map(([a,b]) => <div key={`${set}-${a}`}><strong>{a}</strong><span>{b}</span></div>)}</div>)}
+        </div>
+      </section>
 
       <section className="section section-white"><div className="shell"><div className="section-head"><h2>{t.appsTitle}</h2><p>{t.appsLead}</p></div><div className="application-grid">{applications.map(([Icon,title,body,value]) => <article className="application-card" key={title}><Icon size={28} strokeWidth={1.7}/><h3>{title}</h3><p>{body}</p><Link className="text-link" href={`${localPath(lang,"/request-a-quote")}?application=${value}`}>{isZh ? "討論此應用" : "Discuss this application"}<ArrowRight size={14}/></Link></article>)}</div></div></section>
 

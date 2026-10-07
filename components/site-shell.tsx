@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "@/components/site-link";
 import { ArrowUpRight, Menu } from "lucide-react";
 import { Lang, localPath, otherLanguagePath, pageCopy } from "@/lib/site";
+import { AiSupportDemo } from "@/components/ai-support-demo";
+import { SiteInteractions } from "@/components/site-interactions";
 
 type ShellProps = {
   lang: Lang;
@@ -67,6 +69,8 @@ export function SiteShell({ lang, path, children, quietNav = false }: ShellProps
       </header>
       <main id="main-content">{children}</main>
       {!quietNav && <Footer lang={lang} />}
+      {!quietNav && <AiSupportDemo lang={lang} />}
+      {!quietNav && <SiteInteractions path={path} />}
     </div>
   );
 }
