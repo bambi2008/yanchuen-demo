@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="zh-Hant-HK">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="light" />
+  <meta name="description" content="岩泉官網重構策略與成果互動演示：SEO、GEO、內容、信任及詢盤轉化。" />
+  <title>岩泉官網重構｜策略與成果互動演示</title>
+  <style>
+    :root{
+      --paper:#f2f0e9; --white:#fbfaf6; --ink:#172124; --muted:#657074;
+      --green:#008f47; --green-dark:#006b37; --mint:#d9eee3; --aqua:#80c9c8;
+      --line:rgba(23,33,36,.14); --red:#c94b42; --blue:#114d67;
+      --ease:cubic-bezier(.2,.75,.25,1); --pad:clamp(24px,4vw,76px);
+    }
+    *{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--ink);font-family:Inter,"Avenir Next","Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;color:var(--ink)}
+    button{font:inherit} .deck{position:fixed;inset:0;background:var(--paper);isolation:isolate}
+    .noise{position:fixed;inset:0;z-index:20;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E")}
+    .topbar{position:fixed;z-index:40;left:0;right:0;top:0;height:62px;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(23,33,36,.13);mix-blend-mode:multiply}
+    .brandline{display:flex;align-items:center;gap:14px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    .brandline img{width:112px;height:auto;display:block}.brandline i{height:18px;width:1px;background:currentColor;opacity:.28}.brandline span{opacity:.62}
+    .count{font-variant-numeric:tabular-nums;font-size:12px;font-weight:800;letter-spacing:.14em}.count b{color:var(--green)}
+    .slide{position:absolute;inset:0;display:grid;align-items:center;padding:94px var(--pad) 86px;opacity:0;visibility:hidden;transform:translate3d(4%,0,0) scale(.985);transition:opacity .65s var(--ease),transform .75s var(--ease),visibility .65s;overflow:hidden}
+    .slide.active{opacity:1;visibility:visible;transform:none;z-index:2}.slide.exit{opacity:0;transform:translate3d(-3%,0,0) scale(.99)}
+    .slide::after{content:"";position:absolute;inset:auto -10vw -28vw auto;width:58vw;height:58vw;border-radius:50%;border:1px solid rgba(0,143,71,.16);box-shadow:0 0 0 5vw rgba(0,143,71,.025),0 0 0 12vw rgba(0,143,71,.018);pointer-events:none}
+    .inner{width:min(1560px,100%);margin:auto;position:relative;z-index:1}.split{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:clamp(36px,6vw,110px);align-items:center}
+    .eyebrow{display:flex;align-items:center;gap:10px;color:var(--green);font-size:12px;font-weight:900;letter-spacing:.17em;text-transform:uppercase;margin-bottom:20px}.eyebrow::before{content:"";width:28px;height:3px;background:currentColor}
+    h1,h2,h3,p{margin-top:0}h1,h2{letter-spacing:-.055em;line-height:.97}h1{font-size:clamp(62px,8.2vw,148px);margin-bottom:30px}h2{font-size:clamp(42px,6.2vw,104px);margin-bottom:28px}h3{font-size:clamp(18px,1.5vw,26px);line-height:1.25}.lead{max-width:820px;color:var(--muted);font-size:clamp(18px,1.8vw,29px);line-height:1.62;margin-bottom:0}.small{font-size:14px;line-height:1.65;color:var(--muted)}
+    .giant{font-size:clamp(86px,15vw,270px);line-height:.72;font-weight:900;letter-spacing:-.085em;color:var(--green)}.outline{color:transparent;-webkit-text-stroke:1.5px rgba(23,33,36,.28)}
+    .tag{display:inline-flex;align-items:center;padding:9px 13px;border:1px solid currentColor;border-radius:999px;color:var(--green);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    .line-label{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.line-label::after{content:"";height:1px;flex:1;background:var(--line)}
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s var(--ease),transform .65s var(--ease)}.active .reveal{opacity:1;transform:none}.active .d1{transition-delay:.08s}.active .d2{transition-delay:.16s}.active .d3{transition-delay:.24s}.active .d4{transition-delay:.32s}.active .d5{transition-delay:.42s}
+    .cover{background:var(--paper)}.cover-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:5vw;align-items:end}.cover h1{font-size:clamp(64px,7.6vw,138px);max-width:980px}.cover h1 span{display:block;color:var(--green)}
+    .cover-art{height:min(66vh,760px);position:relative;background:var(--blue);overflow:hidden}.cover-art img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) contrast(1.04)}.cover-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 48%,rgba(0,31,46,.88))}.cover-caption{position:absolute;z-index:1;left:32px;right:32px;bottom:28px;color:white;display:flex;justify-content:space-between;align-items:end;font-size:12px;font-weight:800}.cover-index{position:absolute;top:20px;right:22px;color:white;z-index:1;font-size:80px;line-height:1;font-weight:900;opacity:.2}
+    .presenter-contact{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;font-size:12px;font-weight:800;line-height:1.25;color:var(--muted)}.presenter-contact a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(23,33,36,.28)}.presenter-contact a:hover{color:var(--green)}.cover-contact{position:relative;top:-24px}
+    .tour-slide{background:#e9e7df}.tour-slide::after{display:none}.tour-grid{display:grid;grid-template-columns:minmax(240px,.31fr) minmax(0,.69fr);gap:clamp(30px,4vw,72px);align-items:center}.tour-info h2{font-size:clamp(43px,4.7vw,82px)}.tour-info .lead{font-size:clamp(15px,1.25vw,20px)}.tour-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}.tour-meta span{padding:10px 11px;background:rgba(255,255,255,.55);border-left:3px solid var(--green);font-size:10px;font-weight:800}.tour-route{display:inline-flex;margin-top:16px;color:var(--green-dark);font:800 10px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace}.site-window{height:min(72vh,700px);background:white;border:1px solid rgba(23,33,36,.18);box-shadow:0 26px 70px rgba(23,33,36,.16);overflow:hidden}.site-toolbar{height:34px;background:#d9d8d3;display:flex;align-items:center;gap:6px;padding:0 13px}.site-toolbar i{width:8px;height:8px;border-radius:50%;background:#aaa9a4}.site-toolbar span{margin-left:9px;font:700 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#676763}.site-viewport{height:calc(100% - 34px);overflow:hidden;background:#f4f2ec}.site-scroll{min-height:100%;transform:translateY(0);animation:siteTour 13s var(--ease) both;animation-play-state:paused}.active .site-scroll{animation-play-state:running}@keyframes siteTour{0%,12%{transform:translateY(0)}75%,100%{transform:translateY(var(--travel,-38%))}}
+    .mini-site{font-family:Arial,"Noto Sans TC","PingFang TC",sans-serif;color:#182124;background:#f4f2ec;font-size:10px}.mini-nav{height:54px;padding:0 22px;display:flex;align-items:center;gap:18px;border-bottom:1px solid #d8d5cc}.mini-nav img{width:124px}.mini-links{display:flex;gap:15px;margin-left:auto;font-size:7px;font-weight:900}.mini-nav b{padding:8px 11px;background:#182124;color:white;font-size:7px}.mini-hero{display:grid;grid-template-columns:1fr 1fr;min-height:330px}.mini-copy{padding:45px 36px}.mini-kicker{color:#008f47;font-size:7px;font-weight:900;letter-spacing:.12em}.mini-copy h3,.mini-title h3{font-size:38px;letter-spacing:-.055em;line-height:.98;margin:17px 0}.mini-copy p,.mini-title p{color:#687277;font-size:10px;line-height:1.65}.mini-actions{display:flex;gap:7px;margin-top:17px}.mini-actions span{padding:9px 11px;background:#182124;color:white;font-size:7px;font-weight:900}.mini-actions span+span{background:transparent;color:#182124;border:1px solid #182124}.mini-image{position:relative;min-height:310px;background:#114d67;overflow:hidden}.mini-image img{width:100%;height:100%;object-fit:cover}.mini-image label{position:absolute;left:14px;bottom:12px;color:white;font-size:7px;font-weight:900}.mini-strip{display:grid;grid-template-columns:repeat(3,1fr);margin:0 22px;border:1px solid #d8d5cc}.mini-strip div{padding:13px;border-right:1px solid #d8d5cc}.mini-strip strong{display:block;font-size:9px}.mini-strip small{color:#697377}.mini-section{padding:42px 30px;background:#fbfaf6}.mini-section.alt{background:#ece9e1}.mini-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:21px}.mini-head h4{font-size:24px;letter-spacing:-.045em;margin:0}.mini-head p{max-width:290px;color:#687277;line-height:1.5;margin:0}.mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.mini-card{background:white;border:1px solid #ddd9d0;min-height:165px;overflow:hidden}.mini-card img{width:100%;height:104px;object-fit:cover}.mini-card div{padding:11px}.mini-card h5{font-size:12px;margin:0 0 6px}.mini-card p{font-size:8px;line-height:1.5;color:#697377;margin:0}.mini-apps{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.mini-app{min-height:104px;padding:14px;background:#e5e1d8;border-top:3px solid #008f47}.mini-app strong{display:block;margin:28px 0 7px}.mini-factory{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.mini-factory figure{margin:0;height:116px;position:relative;overflow:hidden}.mini-factory img{width:100%;height:100%;object-fit:cover}.mini-factory figcaption{position:absolute;inset:auto 6px 6px;color:white;background:rgba(0,0,0,.58);padding:4px 5px;font-size:6px}.mini-cta{padding:32px;background:#182124;color:white;display:flex;align-items:center;justify-content:space-between}.mini-cta h4{font-size:22px;margin:0}.mini-cta span{padding:9px 12px;background:#61d695;color:#182124;font-weight:900}.mini-title{padding:44px 30px 28px;display:grid;grid-template-columns:1fr .75fr;gap:24px;align-items:end}.mini-list{padding:0 30px 42px;display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.mini-row{display:grid;grid-template-columns:112px 1fr;background:white;border:1px solid #ddd9d0;min-height:132px}.mini-row img{width:100%;height:100%;object-fit:cover}.mini-row div{padding:17px}.mini-row h4{font-size:15px;margin:0 0 7px}.mini-row p{color:#697377;line-height:1.5;margin:0}.mini-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.mini-option{padding:18px;background:white;border-top:3px solid #008f47;min-height:132px}.mini-option h5{font-size:12px}.mini-option p{color:#697377;line-height:1.5}.mini-guide{display:grid;grid-template-columns:155px 1fr;gap:18px;padding:24px 30px 48px}.mini-toc{background:#182124;color:white;padding:16px;align-self:start}.mini-toc strong{font-size:11px}.mini-toc span{display:block;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.15);font-size:7px;color:#c5cfd0}.mini-guide-main{display:grid;gap:10px}.mini-guide-block{display:grid;grid-template-columns:160px 1fr;gap:15px;background:white;border:1px solid #ddd9d0;padding:14px;min-height:168px}.mini-guide-block img{width:100%;height:140px;object-fit:contain;background:#f2f0ea}.mini-guide-block h4{font-size:16px;margin:8px 0}.mini-guide-block p{color:#697377;line-height:1.55}.mini-stats{display:grid;grid-template-columns:repeat(4,1fr);margin:0 30px 28px;border-top:1px solid #cfcac0}.mini-stats div{padding:17px 7px}.mini-stats strong{display:block;color:#008f47;font-size:23px}.mini-evidence{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.mini-evidence article{background:white;border:1px solid #ddd9d0;padding:19px;min-height:150px}.mini-evidence h4{font-size:14px}.mini-evidence p{color:#697377;line-height:1.55}.mini-event{margin:0 30px 22px;background:#0f4d64;color:white;padding:24px;display:grid;grid-template-columns:1fr .75fr;gap:18px}.mini-event h4{font-size:26px;margin:10px 0}.mini-event p{color:#c4d6db;line-height:1.55}.mini-event aside{border-left:1px solid rgba(255,255,255,.25);padding-left:20px}.mini-history{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.mini-history div{padding:17px;background:white;border-top:3px solid #008f47}.mini-history strong{font-size:20px;display:block}.mini-contact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;padding:0 30px 36px}.mini-contact{background:white;border:1px solid #ddd9d0;padding:19px;min-height:132px}.mini-contact.primary{background:#182124;color:white}.mini-contact small{color:#008f47;font-weight:900}.mini-contact h4{font-size:16px;margin:21px 0 7px}.mini-form-layout{display:grid;grid-template-columns:.65fr 1.35fr;gap:10px;padding:0 30px 43px}.mini-notice{padding:19px;background:#182124;color:white}.mini-notice h4{font-size:15px}.mini-notice li{font-size:7px;margin:7px 0;color:#bac5c6}.mini-form{padding:19px;background:white;border:1px solid #ddd9d0}.mini-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini-field label{display:block;font-size:6px;font-weight:900;margin-bottom:4px}.mini-field i{height:28px;border:1px solid #bfc3c1;display:block}.mini-field.full{grid-column:1/-1}.mini-field.full i{height:54px}.mini-form button{border:0;background:#182124;color:white;padding:9px 12px;margin-top:11px;font-size:7px;font-weight:900}.mini-ai{display:grid;grid-template-columns:.75fr 1.25fr;gap:12px;padding:27px 30px 43px}.mini-chat{background:white;border:1px solid #ddd9d0;padding:16px}.mini-bubble{width:78%;padding:9px;margin:7px 0;background:#ecefeb;border-radius:11px;font-size:8px;line-height:1.5}.mini-bubble.user{margin-left:auto;background:#008f47;color:white}.mini-dashboard{background:#152023;color:white;padding:19px}.mini-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.mini-metric{background:#223034;padding:12px}.mini-metric strong{font-size:21px;display:block}.mini-chart{height:112px;margin-top:14px;display:flex;align-items:end;gap:6px;border-bottom:1px solid #425155}.mini-chart i{flex:1;background:#54d28f;height:var(--bar)}
+    .engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px}.engine{position:relative;padding:34px;border:1px solid var(--line);background:rgba(255,255,255,.62);min-height:270px;overflow:hidden}.engine:first-child{border-top:5px solid var(--green)}.engine:last-child{border-top:5px solid var(--ink)}.engine-num{font-size:12px;font-weight:900;color:var(--green)}.engine h3{font-size:clamp(25px,2.4vw,43px);margin:36px 0 14px}.engine-flow{display:flex;gap:8px;align-items:center;margin-top:28px;flex-wrap:wrap}.engine-flow span{padding:8px 11px;background:var(--paper);font-size:12px;font-weight:800}.engine-flow b{color:var(--green)}
+    .merge{margin-top:18px;background:var(--ink);color:white;padding:19px 24px;display:flex;align-items:center;justify-content:center;gap:20px;font-size:clamp(18px,2vw,30px);font-weight:850}.merge span{color:#6be3a5}
+    .audit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px}.audit-card{background:var(--white);border:1px solid var(--line);padding:26px;min-height:230px}.audit-card strong{display:block;font-size:clamp(50px,6vw,96px);letter-spacing:-.07em;color:var(--green);line-height:1}.audit-card p{font-weight:800;line-height:1.5;margin:20px 0 0}.audit-card small{display:block;color:var(--muted);margin-top:8px;line-height:1.5}.audit-note{margin-top:14px;color:var(--muted);font-size:12px}
+    .matrix{margin-top:34px;border-top:1px solid var(--ink)}.matrix-row{display:grid;grid-template-columns:.82fr 36px 1fr 1fr;gap:20px;align-items:center;padding:17px 0;border-bottom:1px solid var(--line)}.matrix-row>*{margin:0}.matrix-row .before{color:var(--muted);font-size:14px}.matrix-row .arrow{color:var(--green);font-size:22px;text-align:center}.matrix-row .after{font-weight:850}.matrix-row .impact{font-size:13px;color:var(--green-dark);font-weight:750}.matrix-head{font-size:10px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+    .search-demo{background:var(--ink);color:white;padding:28px 30px;margin-top:28px}.search-query{display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,.22);padding-bottom:18px;font-size:clamp(17px,1.5vw,25px)}.search-query i{width:14px;height:14px;border:2px solid #6be3a5;border-radius:50%;position:relative}.search-query i::after{content:"";position:absolute;width:7px;height:2px;background:#6be3a5;right:-6px;bottom:-3px;transform:rotate(45deg)}.search-results{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}.search-results span{padding:12px;background:rgba(255,255,255,.07);font-size:12px}.search-results b{display:block;color:#6be3a5;margin-bottom:5px}
+    .geo-orbit{position:relative;min-height:510px;display:grid;place-items:center}.geo-core{width:190px;height:190px;border-radius:50%;background:var(--green);color:white;display:grid;place-items:center;text-align:center;font-weight:900;font-size:24px;box-shadow:0 0 0 28px rgba(0,143,71,.09),0 0 0 90px rgba(0,143,71,.04)}.question{position:absolute;width:220px;padding:18px;background:var(--white);border:1px solid var(--line);box-shadow:0 12px 30px rgba(23,33,36,.08);font-size:14px;font-weight:800;line-height:1.45}.q1{top:5%;left:2%}.q2{top:7%;right:0}.q3{bottom:8%;left:0}.q4{right:2%;bottom:5%}.question small{display:block;color:var(--green);font-size:10px;margin-bottom:7px;letter-spacing:.1em;text-transform:uppercase}.geo-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px}.geo-list div{padding:16px 18px;background:rgba(255,255,255,.65);border-left:3px solid var(--green);font-size:13px;line-height:1.45}.geo-list b{display:block;margin-bottom:5px}.geo-disclaimer{margin-top:15px;padding:12px 16px;border:1px dashed var(--line);font-size:11px;color:var(--muted)}
+    .journey{position:relative;margin-top:56px;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}.journey::before{content:"";position:absolute;top:39px;left:9%;right:9%;height:3px;background:linear-gradient(90deg,var(--green),var(--aqua),var(--ink));transform-origin:left;transform:scaleX(0);transition:transform 1.4s .4s var(--ease)}.active .journey::before{transform:scaleX(1)}.journey-card{position:relative;padding-top:80px}.journey-node{position:absolute;top:22px;left:0;width:36px;height:36px;border-radius:50%;background:var(--paper);border:8px solid var(--green);z-index:1}.journey-card:nth-child(n+4) .journey-node{border-color:var(--ink)}.journey-card h3{font-size:20px;margin-bottom:9px}.journey-card p{font-size:13px;color:var(--muted);line-height:1.55}.journey-card em{display:block;color:var(--green);font-style:normal;font-size:11px;font-weight:900;letter-spacing:.12em;margin-top:16px}
+    .browser{background:white;border:1px solid var(--line);box-shadow:0 26px 70px rgba(23,33,36,.13);overflow:hidden}.browserbar{height:34px;background:#e7e5df;display:flex;align-items:center;gap:6px;padding:0 12px}.browserbar i{width:8px;height:8px;border-radius:50%;background:#b8b7b1}.browserbody{display:grid;grid-template-columns:1fr 1fr;min-height:440px}.mock-copy{padding:46px 40px}.mock-copy small{color:var(--green);font-weight:850}.mock-copy h3{font-size:clamp(33px,3.5vw,58px);letter-spacing:-.055em;margin:20px 0}.mock-copy p{color:var(--muted);line-height:1.6}.mock-btn{display:inline-block;background:var(--ink);color:white;padding:12px 17px;font-size:11px;font-weight:800;margin-top:16px}.mock-img{position:relative;overflow:hidden;background:var(--blue)}.mock-img img{width:100%;height:100%;object-fit:cover}.mock-img::after{content:"Product image · process reference";position:absolute;bottom:18px;left:20px;color:white;font-size:10px;font-weight:800}.feature-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}.feature-strip span{padding:15px;font-size:10px;border-right:1px solid var(--line)}
+    .proof-stack{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}.proof{min-height:270px;padding:26px;background:var(--white);border:1px solid var(--line);position:relative;overflow:hidden}.proof:nth-child(2){background:var(--ink);color:white}.proof:nth-child(3){background:var(--green);color:white}.proof .no{font-size:64px;font-weight:900;opacity:.1;position:absolute;right:16px;top:8px}.proof h3{margin-top:70px}.proof p{font-size:13px;line-height:1.55;color:inherit;opacity:.74}.proof b{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}.proof:nth-child(n+2) b{color:#b7f3d2}
+    .collage{display:grid;grid-template-columns:1.1fr .9fr;grid-template-rows:1fr 1fr;gap:12px;height:min(62vh,620px)}.collage figure{margin:0;position:relative;overflow:hidden;background:#d9ddd9}.collage figure:first-child{grid-row:1/3}.collage img{width:100%;height:100%;object-fit:cover;transition:transform 7s ease}.active .collage img{transform:scale(1.08)}.collage figcaption{position:absolute;left:14px;bottom:12px;background:rgba(23,33,36,.86);color:white;padding:7px 10px;font-size:10px;font-weight:800}.fact-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:25px}.fact-row div{border-top:3px solid var(--green);padding:15px 0}.fact-row strong{font-size:24px;display:block}.fact-row span{font-size:11px;color:var(--muted)}
+    .lang-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:42px}.lang-panel{padding:34px;border:1px solid var(--line);background:var(--white);min-height:320px}.lang-panel:nth-child(2){background:var(--ink);color:white}.lang-code{font-size:11px;color:var(--green);font-weight:900;letter-spacing:.16em}.lang-panel:nth-child(2) .lang-code{color:#6be3a5}.lang-panel h3{font-size:clamp(30px,3vw,52px);margin:38px 0 18px;letter-spacing:-.05em}.lang-panel ul{list-style:none;margin:0;padding:0}.lang-panel li{padding:9px 0;border-top:1px solid currentColor;font-size:13px;opacity:.75}.hreflang{margin-top:13px;padding:13px;text-align:center;color:var(--green-dark);border:1px dashed rgba(0,143,71,.4);font-size:11px;font-weight:800}
+    .conversion-map{display:grid;grid-template-columns:1fr 70px 1fr;align-items:center;gap:20px}.contact-card{background:var(--white);border:1px solid var(--line);padding:34px}.contact-item{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-top:1px solid var(--line)}.contact-item b{color:var(--green);width:90px}.contact-item span{font-size:14px;line-height:1.5}.handoff{height:70px;width:70px;border-radius:50%;background:var(--green);color:white;display:grid;place-items:center;font-size:28px}.rfq-mini{background:var(--ink);color:white;padding:34px}.rfq-mini label{display:block;font-size:10px;color:#9ab1b4;margin:12px 0 7px}.rfq-mini i{display:block;height:38px;border:1px solid rgba(255,255,255,.22)}.rfq-mini button{margin-top:20px;border:0;background:#6be3a5;color:var(--ink);padding:12px 16px;font-weight:900}.conversion-notes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.conversion-notes div{padding:14px;background:rgba(255,255,255,.6);font-size:12px}.conversion-notes b{display:block;color:var(--green);margin-bottom:5px}
+    .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:38px}.demo-panel{min-height:370px;padding:28px;border:1px solid var(--line);background:var(--white)}.demo-panel h3{font-size:27px}.chat{margin-top:30px}.bubble{width:82%;padding:12px 15px;border-radius:16px 16px 16px 2px;background:#edf0ed;font-size:12px;line-height:1.5;margin-bottom:9px}.bubble.user{margin-left:auto;border-radius:16px 16px 2px 16px;background:var(--green);color:white}.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:28px 0}.metric{padding:16px;background:var(--paper)}.metric strong{display:block;font-size:30px}.metric span{font-size:9px;color:var(--muted)}.bars{display:flex;align-items:end;height:90px;gap:7px}.bars i{flex:1;background:var(--green);opacity:.75;animation:bars 2s ease-in-out infinite alternate}.bars i:nth-child(2n){animation-delay:-.8s}.bars i:nth-child(3n){animation-delay:-1.3s}@keyframes bars{from{height:18%}to{height:var(--h)}}
+    .status-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}.status{padding:27px;background:var(--white);border-top:5px solid var(--green)}.status:nth-child(2){border-color:#d29d36}.status:nth-child(3){border-color:#9aa3a5}.status h3{font-size:22px}.status ul{padding:0;margin:22px 0 0;list-style:none}.status li{padding:9px 0 9px 20px;border-top:1px solid var(--line);font-size:12px;line-height:1.45;position:relative}.status li::before{content:"";position:absolute;left:0;top:14px;width:7px;height:7px;background:var(--green);border-radius:50%}.status:nth-child(2) li::before{background:#d29d36}.status:nth-child(3) li::before{background:#9aa3a5}
+    .final{background:var(--ink);color:white}.final::after{border-color:rgba(107,227,165,.14);box-shadow:0 0 0 5vw rgba(107,227,165,.025),0 0 0 12vw rgba(107,227,165,.018)}.final .eyebrow{color:#6be3a5}.final h2{max-width:1400px;font-size:clamp(54px,7.3vw,128px)}.final h2 span{color:#6be3a5}.final-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.16);margin-top:48px}.final-grid div{background:var(--ink);padding:22px}.final-grid small{display:block;color:#6be3a5;font-weight:900;margin-bottom:8px}.final-grid b{font-size:17px}.final-foot{display:flex;justify-content:space-between;align-items:end;margin-top:38px;color:#9db0b3;font-size:12px}.final-foot strong{color:white;font-size:16px}
+    .controls{position:fixed;z-index:50;left:var(--pad);right:var(--pad);bottom:22px;display:flex;align-items:center;gap:12px}.progress{height:3px;background:rgba(23,33,36,.15);flex:1;overflow:hidden}.progress i{display:block;height:100%;width:0;background:var(--green);transition:width .5s var(--ease)}.control-btn{border:1px solid rgba(23,33,36,.22);background:rgba(242,240,233,.86);backdrop-filter:blur(10px);width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ink);cursor:pointer}.control-btn:hover{background:white}.control-btn.active{background:var(--green);border-color:var(--green);color:white}.control-btn svg{width:15px}.dots{display:flex;gap:5px}.dot{width:6px;height:6px;border:0;padding:0;border-radius:50%;background:rgba(23,33,36,.25);cursor:pointer}.dot.active{width:20px;border-radius:4px;background:var(--green)}
+    .toast{position:fixed;z-index:80;left:50%;bottom:76px;transform:translate(-50%,20px);opacity:0;background:var(--ink);color:white;padding:9px 14px;font-size:11px;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:900px){.topbar{height:52px}.brandline img{width:88px}.brandline span{display:none}.slide{padding-top:72px;padding-bottom:74px;overflow-y:auto;align-items:start}.slide h2{font-size:clamp(35px,9.4vw,48px)}.split,.cover-grid,.browserbody,.conversion-map{grid-template-columns:1fr}.cover-art{height:34vh;min-height:240px}.cover h1{font-size:clamp(46px,13.2vw,70px)}.engine-grid,.lang-grid,.demo-grid,.status-columns{grid-template-columns:1fr}.engine{min-height:auto}.audit-grid{grid-template-columns:1fr 1fr}.audit-card{min-height:170px}.matrix-row{grid-template-columns:1fr 24px 1.1fr}.matrix-row .impact{display:none}.geo-orbit{min-height:420px}.question{width:150px;font-size:11px}.journey{grid-template-columns:1fr 1fr;margin-top:28px}.journey::before{display:none}.journey-card{padding-top:35px}.journey-node{top:0}.proof-stack{grid-template-columns:1fr}.proof{min-height:180px}.proof h3{margin-top:35px}.collage{height:48vh}.fact-row{grid-template-columns:1fr}.handoff{margin:auto;transform:rotate(90deg)}.conversion-notes,.final-grid{grid-template-columns:1fr}.controls{bottom:15px}.dots{display:none}.search-results{grid-template-columns:1fr}.status-columns{padding-bottom:70px}}
+    @media(max-height:760px) and (min-width:901px){.slide{padding-top:72px;padding-bottom:65px}.topbar{height:48px}h1{font-size:clamp(54px,7vw,112px)}h2{font-size:clamp(38px,5vw,78px)}.cover h1{font-size:clamp(52px,6.5vw,84px)}.cover-art{height:min(61vh,590px)}.lead{font-size:18px}.audit-card{min-height:185px}.engine{min-height:220px}.browserbody{min-height:330px}.mock-copy{padding:28px}.geo-orbit{min-height:410px}.contact-card,.rfq-mini{padding:22px 34px}.contact-item{padding:11px 0}.rfq-mini label{margin:8px 0 5px}.conversion-notes div{padding:9px 14px}.final h2{font-size:clamp(44px,5.6vw,72px)}.final-grid{margin-top:28px}.final-foot{margin-top:24px}.demo-panel{min-height:300px}.controls{bottom:14px}}
+    @media(max-width:900px){.tour-grid{grid-template-columns:1fr}.tour-info{padding-top:8px}.site-window{height:520px}.tour-meta{grid-template-columns:1fr 1fr}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}.journey::before{transform:scaleX(1)}}
+  </style>
+</head>
+<body>
+<main class="deck" aria-label="岩泉官網重構成果演示">
+  <div class="noise" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brandline"><img src="{{ASSET:yan-chuen-logo.webp}}" alt="Yan Chuen Co., Ltd." /><i></i><span>Website redesign story</span></div>
+    <div class="count"><b id="currentNo">01</b> / <span id="totalNo">14</span></div>
+  </header>
+
+  <section class="slide cover active" data-title="封面">
+    <div class="inner cover-grid">
+      <div>
+        <div class="eyebrow reveal">Yan Chuen Website Redesign</div>
+        <h1 class="reveal d1">把製造實力，<span>變成增長入口</span></h1>
+        <p class="lead reveal d2">岩泉官網重構策略與成果互動演示<br />SEO · GEO · 內容 · 信任 · 詢盤轉化</p>
+        <div style="margin-top:22px" class="reveal d3 cover-contact"><span class="tag">Private client presentation · 2026</span><div class="presenter-contact"><a href="mailto:maoqin1979@gmail.com">maoqin1979@gmail.com</a><a href="tel:+85254187719">+852 5418 7719</a><a href="https://wa.me/85254187719" target="_blank" rel="noreferrer">WhatsApp</a></div></div>
+      </div>
+      <div class="cover-art reveal d2"><span class="cover-index">01</span><img src="{{ASSET:hero-keypad-collection.webp}}" alt="岩泉公開網站展示的按鍵樣品組合" /><div class="cover-caption"><span>Custom keypads & rubber components</span><span>HONG KONG</span></div></div>
+    </div>
+  </section>
+
+  <section class="slide tour-slide" data-title="首頁全景">
+    <div class="inner tour-grid">
+      <div class="tour-info"><div class="eyebrow reveal">Website tour · 01</div><h2 class="reveal d1">首頁<br />完整採購入口</h2><p class="lead reveal d2">從首屏主張一路瀏覽產品、應用、工序與最終詢盤，不只看一張首屏截圖。</p><div class="tour-meta reveal d3"><span>產品入口</span><span>設計資料</span><span>工廠工序</span><span>詢盤 CTA</span></div><code class="tour-route reveal d4">/zh</code></div>
+      <div class="site-window reveal d2"><div class="site-toolbar"><i></i><i></i><i></i><span>yanchuen-demo / zh</span></div><div class="site-viewport"><div class="site-scroll mini-site" style="--travel:-47%">
+        <div class="mini-nav"><img src="{{ASSET:yan-chuen-logo.webp}}" alt="岩泉標誌"/><div class="mini-links"><span>產品</span><span>設計指南</span><span>生產工序</span><span>展覽信息</span><span>關於岩泉</span><span>聯絡方式</span></div><b>提交需求 ↗</b></div>
+        <div class="mini-hero"><div class="mini-copy"><span class="mini-kicker">香港 · 訂製輸入組件</span><h3>為設備項目訂製按鍵與橡膠組件</h3><p>從矽膠按鍵、薄膜按鍵、橡膠零件與實用設計資料開始，向岩泉說明應用、結構與項目階段。</p><div class="mini-actions"><span>提交項目需求 →</span><span>查看設計資料</span></div></div><div class="mini-image"><img src="{{ASSET:hero-keypad-collection.webp}}" alt="按鍵樣品組合"/><label>岩泉公開網站展示的按鍵樣品組合</label></div></div>
+        <div class="mini-strip"><div><strong>按項目討論</strong><small>結合實際應用確認工藝</small></div><div><strong>未有圖紙也可開始</strong><small>草圖、樣品或需求說明</small></div><div><strong>工程參考資料</strong><small>涵蓋結構與裝配問題</small></div></div>
+        <div class="mini-section"><div class="mini-head"><h4>先從需要說明的部件開始</h4><p>以真實產品類別和工藝資料承接不同採購意圖。</p></div><div class="mini-cards"><article class="mini-card"><img src="{{ASSET:silicone-keypad-multicolor.webp}}" alt="矽膠按鍵"/><div><h5>矽膠按鍵</h5><p>顏色、字符、導電觸點、雕刻與表面處理。</p></div></article><article class="mini-card"><img src="{{ASSET:membrane-keypad.webp}}" alt="薄膜按鍵"/><div><h5>薄膜按鍵</h5><p>覆膜、印刷、貼合與元件配置。</p></div></article><article class="mini-card"><img src="{{ASSET:rubber-components.webp}}" alt="橡膠零件"/><div><h5>橡膠零件</h5><p>按應用、結構及安裝條件開始討論。</p></div></article></div></div>
+        <div class="mini-section alt"><div class="mini-head"><h4>用應用需求幫助工程溝通</h4><p>應用方向不冒充客戶案例，具體性能逐項確認。</p></div><div class="mini-apps"><div class="mini-app"><strong>工業控制</strong><span>安裝結構與操作方式</span></div><div class="mini-app"><strong>支付終端</strong><span>鍵位、觸感及裝配空間</span></div><div class="mini-app"><strong>醫療設備</strong><span>材料與合規需項目確認</span></div><div class="mini-app"><strong>電訊設備</strong><span>介面配置與使用環境</span></div></div></div>
+        <div class="mini-section"><div class="mini-head"><h4>公開 Factory Tour 工序</h4><p>用15張具名照片展示橡膠與薄膜工序。</p></div><div class="mini-factory"><figure><img src="{{ASSET:factory-mixing.webp}}" alt="混煉"/><figcaption>混煉</figcaption></figure><figure><img src="{{ASSET:factory-molding.webp}}" alt="成型"/><figcaption>成型</figcaption></figure><figure><img src="{{ASSET:factory-printing.webp}}" alt="印刷"/><figcaption>印刷</figcaption></figure><figure><img src="{{ASSET:factory-coating.webp}}" alt="塗層"/><figcaption>塗層</figcaption></figure></div></div>
+        <div class="mini-cta"><h4>準備好討論訂製項目？</h4><span>提交項目需求 →</span></div>
+      </div></div></div>
+    </div>
+  </section>
+
+  <section class="slide tour-slide" data-title="產品總覽">
+    <div class="inner tour-grid"><div class="tour-info"><div class="eyebrow reveal">Website tour · 02</div><h2 class="reveal d1">產品總覽<br />六個真實類別</h2><p class="lead reveal d2">將原有產品清單改造成可閱讀、可比較、可直接進入詢盤的分類入口。</p><div class="tour-meta reveal d3"><span>矽膠按鍵</span><span>薄膜按鍵</span><span>橡膠零件</span><span>其他組件</span></div><code class="tour-route reveal d4">/zh/products</code></div>
+      <div class="site-window reveal d2"><div class="site-toolbar"><i></i><i></i><i></i><span>yanchuen-demo / zh / products</span></div><div class="site-viewport"><div class="site-scroll mini-site" style="--travel:-35%"><div class="mini-nav"><img src="{{ASSET:yan-chuen-logo.webp}}" alt="岩泉標誌"/><div class="mini-links"><span>產品</span><span>設計指南</span><span>生產工序</span><span>關於岩泉</span></div><b>提交需求 ↗</b></div><div class="mini-title"><div><span class="mini-kicker">產品總覽</span><h3>訂製按鍵、橡膠零件與相關組件</h3></div><p>以公司公開目錄為邊界，讓買家先辨認部件類型，再進入完整產品頁或預填詢盤。</p></div><div class="mini-list">
+        <article class="mini-row"><img src="{{ASSET:silicone-keypad-black.webp}}" alt="矽膠按鍵"/><div><h4>矽膠按鍵</h4><p>多色、字符、導電觸點、雕刻、包膠與表面處理。</p></div></article><article class="mini-row"><img src="{{ASSET:membrane-keypad.webp}}" alt="薄膜按鍵"/><div><h4>薄膜按鍵</h4><p>圖案、壓凸、貼合及元件配置按項目討論。</p></div></article><article class="mini-row"><img src="{{ASSET:rubber-components.webp}}" alt="橡膠零件"/><div><h4>橡膠零件</h4><p>由用途、尺寸、材料和裝配條件開始。</p></div></article><article class="mini-row"><img src="{{ASSET:keypad-collection-light.webp}}" alt="按鍵組件"/><div><h4>按鍵組件</h4><p>按鍵、塑膠件及相關部件的組合方向。</p></div></article><article class="mini-row"><img src="{{ASSET:guide-conductive.webp}}" alt="彈性導電連接件"/><div><h4>彈性導電連接件</h4><p>以連接與裝配需求承接工程討論。</p></div></article><article class="mini-row"><img src="{{ASSET:silicone-tubing.webp}}" alt="矽膠管"/><div><h4>矽膠管</h4><p>公司公開產品範圍之一，具體條件需確認。</p></div></article></div><div class="mini-cta"><h4>找到相近類型後，直接說明項目</h4><span>預填產品需求 →</span></div></div></div></div>
+    </div>
+  </section>
+
+  <section class="slide tour-slide" data-title="矽膠產品頁">
+    <div class="inner tour-grid"><div class="tour-info"><div class="eyebrow reveal">Website tour · 03</div><h2 class="reveal d1">矽膠產品頁<br />從樣品到規格溝通</h2><p class="lead reveal d2">把樣品圖、工藝名稱、用途和買家需要準備的資料放在同一頁。</p><div class="tour-meta reveal d3"><span>工藝選項</span><span>樣品圖集</span><span>準備清單</span><span>指南入口</span></div><code class="tour-route reveal d4">/zh/silicone-rubber-keypad</code></div>
+      <div class="site-window reveal d2"><div class="site-toolbar"><i></i><i></i><i></i><span>yanchuen-demo / zh / silicone-rubber-keypad</span></div><div class="site-viewport"><div class="site-scroll mini-site" style="--travel:-39%"><div class="mini-nav"><img src="{{ASSET:yan-chuen-logo.webp}}" alt="岩泉標誌"/><div class="mini-links"><span>產品</span><span>設計指南</span><span>聯絡方式</span></div><b>提交需求 ↗</b></div><div class="mini-hero"><div class="mini-copy"><span class="mini-kicker">訂製產品</span><h3>矽膠按鍵</h3><p>按實際設備、結構、字符、觸感與使用環境討論的訂製部件。</p><div class="mini-actions"><span>提交產品需求 →</span><span>查看設計指南</span></div></div><div class="mini-image"><img src="{{ASSET:silicone-keypad-grey.webp}}" alt="矽膠按鍵樣品"/><label>公開產品樣品 · 工藝參考</label></div></div><div class="mini-section"><div class="mini-head"><h4>可討論的訂製選項</h4><p>每項同時說明作用和需向工程提供的資料。</p></div><div class="mini-options"><article class="mini-option"><h5>顏色與字樣</h5><p>基體顏色、多色印刷、字符和圖案位置。</p></article><article class="mini-option"><h5>導電觸點</h5><p>導電膠粒和接觸形式需配合電路設計。</p></article><article class="mini-option"><h5>雷射雕刻</h5><p>討論透光、字樣層次與外觀要求。</p></article><article class="mini-option"><h5>塑膠／金屬包膠</h5><p>提供裝配關係、材料與關鍵尺寸。</p></article><article class="mini-option"><h5>表面處理</h5><p>PU、手感、金屬外觀與滴膠等公開選項。</p></article><article class="mini-option"><h5>項目準備</h5><p>應用、尺寸、字符、環境與目前階段。</p></article></div></div><div class="mini-section alt"><div class="mini-head"><h4>真實工藝樣品圖集</h4><p>圖注說明工藝性質，不冒充客戶案例。</p></div><div class="mini-cards"><article class="mini-card"><img src="{{ASSET:silicone-keypad-multicolor.webp}}" alt="多色按鍵"/><div><h5>多色與印刷</h5></div></article><article class="mini-card"><img src="{{ASSET:silicone-keypad-black.webp}}" alt="黑色按鍵"/><div><h5>字符與外觀</h5></div></article><article class="mini-card"><img src="{{ASSET:silicone-keypad-sample.webp}}" alt="工藝樣品"/><div><h5>工藝樣品</h5></div></article></div></div><div class="mini-cta"><h4>有圖紙或未有圖紙，都可以開始</h4><span>整理項目資料 →</span></div></div></div></div>
+    </div>
+  </section>
+
+  <section class="slide tour-slide" data-title="工程指南">
+    <div class="inner tour-grid"><div class="tour-info"><div class="eyebrow reveal">Website tour · 04</div><h2 class="reveal d1">工程指南<br />12章可定位資料</h2><p class="lead reveal d2">左側目錄、正確錨點、原始技術圖和可選擇正文，讓工程資料真正可閱讀。</p><div class="tour-meta reveal d3"><span>正確章節</span><span>工程圖放大</span><span>準備提示</span><span>返回詢盤</span></div><code class="tour-route reveal d4">/zh/design-guides/silicone-rubber-keypad</code></div>
+      <div class="site-window reveal d2"><div class="site-toolbar"><i></i><i></i><i></i><span>yanchuen-demo / zh / design-guides</span></div><div class="site-viewport"><div class="site-scroll mini-site" style="--travel:-49%"><div class="mini-nav"><img src="{{ASSET:yan-chuen-logo.webp}}" alt="岩泉標誌"/><div class="mini-links"><span>產品</span><span>設計指南</span><span>生產工序</span></div><b>分享設計需求 ↗</b></div><div class="mini-title"><div><span class="mini-kicker">工程設計資料</span><h3>矽膠按鍵設計指南</h3></div><p>把公開工程圖與可閱讀說明配對，幫助採購與工程人員準備討論。</p></div><div class="mini-guide"><aside class="mini-toc"><strong>本頁目錄</strong><span>基本結構</span><span>導電設計</span><span>特殊設計</span><span>裝配</span><span>顏色與字樣</span><span>表面處理</span><span>圖稿</span><span>壽命測試</span><span>力與行程</span><span>公差</span><span>按鍵截面</span></aside><div class="mini-guide-main"><article class="mini-guide-block"><img src="{{ASSET:guide-construction.webp}}" alt="基本結構圖"/><div><span class="mini-kicker">01 · CONSTRUCTION</span><h4>基本結構與部件</h4><p>辨認頂部表面、導電觸點、按鍵行程和裝配空間。圖中數值只作原始參考。</p></div></article><article class="mini-guide-block"><img src="{{ASSET:guide-conductive.webp}}" alt="導電設計圖"/><div><span class="mini-kicker">02 · CONDUCTIVE DESIGN</span><h4>導電觸點與設計形式</h4><p>說明接觸形式及需要工程確認的電路與尺寸資料。</p></div></article><article class="mini-guide-block"><img src="{{ASSET:guide-force-stroke.webp}}" alt="力與行程圖"/><div><span class="mini-kicker">10 · FORCE & STROKE</span><h4>力與行程曲線</h4><p>用於溝通觸感方向，不把示意曲線寫成所有產品保證值。</p></div></article><article class="mini-guide-block"><img src="{{ASSET:guide-key-sections.webp}}" alt="按鍵截面圖"/><div><span class="mini-kicker">12 · KEY SECTIONS</span><h4>按鍵截面與結構差異</h4><p>把結構差異連回實際裝配和需求說明。</p></div></article></div></div><div class="mini-cta"><h4>讀完設計資料，直接分享需求</h4><span>Share requirements →</span></div></div></div></div>
+    </div>
+  </section>
+
+  <section class="slide tour-slide" data-title="關於與工序">
+    <div class="inner tour-grid"><div class="tour-info"><div class="eyebrow reveal">Website tour · 05</div><h2 class="reveal d1">關於岩泉<br />企業證據與工序</h2><p class="lead reveal d2">公司資料、第三方來源、能力邊界與 Factory Tour 集中呈現，不與生產頁面重複。</p><div class="tour-meta reveal d3"><span>1992檔案</span><span>第三方來源</span><span>能力邊界</span><span>15項工序</span></div><code class="tour-route reveal d4">/zh/about · /zh#factory-tour</code></div>
+      <div class="site-window reveal d2"><div class="site-toolbar"><i></i><i></i><i></i><span>yanchuen-demo / zh / about</span></div><div class="site-viewport"><div class="site-scroll mini-site" style="--travel:-42%"><div class="mini-nav"><img src="{{ASSET:yan-chuen-logo.webp}}" alt="岩泉標誌"/><div class="mini-links"><span>產品</span><span>展覽信息</span><span>關於岩泉</span><span>聯絡方式</span></div><b>提交需求 ↗</b></div><div class="mini-title"><div><span class="mini-kicker">公司概覽</span><h3>關於岩泉</h3></div><p>以公開資料、香港貿發局檔案及可追溯行業報導整理供應商概覽。</p></div><div class="mini-stats"><div><strong>1992</strong><span>公開檔案所列成立年份</span></div><div><strong>自1996</strong><span>於貿發局刊登資料</span></div><div><strong>香港</strong><span>出口商及製造商</span></div><div><strong>訂製</strong><span>輸入與橡膠組件</span></div></div><div class="mini-section"><div class="mini-head"><h4>現有資料能夠說明甚麼</h4><p>不把來源延伸成未經證實的性能承諾。</p></div><div class="mini-evidence"><article><span class="mini-kicker">產品輪廓</span><h4>聚焦輸入與橡膠組件</h4><p>硅膠按鍵、薄膜按鍵、橡膠零件、組件、連接件及矽膠管。</p></article><article><span class="mini-kicker">公開工序</span><h4>多項生產工序照片</h4><p>混煉、成型、印刷、雷雕、塗層、滴膠，以及薄膜印刷、模切與貼合。</p></article><article><span class="mini-kicker">第三方參考</span><h4>HKTDC 公司檔案</h4><p>可由採購方直接開啟查核的公司歷史資料。</p></article><article><span class="mini-kicker">行業報導</span><h4>2024 產品介紹</h4><p>明確標示為渠道報導，而非客戶評價。</p></article></div></div><div class="mini-section alt"><div class="mini-head"><h4>工廠導覽</h4><p>以具名工序照片展示，而不虛構廠房歸屬。</p></div><div class="mini-factory"><figure><img src="{{ASSET:factory-mixing.webp}}" alt="混煉"/><figcaption>混煉</figcaption></figure><figure><img src="{{ASSET:factory-molding.webp}}" alt="成型"/><figcaption>成型</figcaption></figure><figure><img src="{{ASSET:factory-laser.webp}}" alt="雷射雕刻"/><figcaption>雷射雕刻</figcaption></figure><figure><img src="{{ASSET:factory-epoxy.webp}}" alt="滴膠"/><figcaption>滴膠</figcaption></figure></div></div><div class="mini-cta"><h4>以公開證據建立採購信任</h4><span>聯絡岩泉 →</span></div></div></div></div>
+    </div>
+  </section>
+
+  <section class="slide tour-slide" data-title="展覽信息">
+    <div class="inner tour-grid"><div class="tour-info"><div class="eyebrow reveal">Website tour · 06</div><h2 class="reveal d1">展覽信息<br />獨立動態入口</h2><p class="lead reveal d2">將即將舉行的展會、展位、到訪準備和歷年記錄從「關於岩泉」中獨立出來。</p><div class="tour-meta reveal d3"><span>公開名單</span><span>展位資料</span><span>到訪準備</span><span>歷年記錄</span></div><code class="tour-route reveal d4">/zh/trade-shows</code></div>
+      <div class="site-window reveal d2"><div class="site-toolbar"><i></i><i></i><i></i><span>yanchuen-demo / zh / trade-shows</span></div><div class="site-viewport"><div class="site-scroll mini-site" style="--travel:-25%"><div class="mini-nav"><img src="{{ASSET:yan-chuen-logo.webp}}" alt="岩泉標誌"/><div class="mini-links"><span>產品</span><span>生產工序</span><span>展覽信息</span><span>關於岩泉</span></div><b>提交需求 ↗</b></div><div class="mini-title"><div><span class="mini-kicker">展覽與會面</span><h3>在行業展會與岩泉見面</h3></div><p>集中展示已確認的參展安排、展位資訊與可追溯往屆記錄。</p></div><div class="mini-event"><div><span class="mini-kicker" style="color:#67e0a4">即將參展 · 已有公開名單</span><h4>electronicAsia 2026</h4><p>2026年10月13–16日 · 香港會議展覽中心<br/>展位5B-A01 · 鍵盤及開關</p><div class="mini-actions"><span style="background:white;color:#182124">查看主辦方名單 ↗</span></div></div><aside><strong>到訪前準備</strong><p>應用場景<br/>圖紙、樣品或草圖<br/>預計數量與項目階段</p></aside></div><div class="mini-section"><div class="mini-head"><h4>近年 electronicAsia 參展資料</h4><p>只說明參展記錄，不延伸為客戶或認證證明。</p></div><div class="mini-history"><div><strong>2025</strong><span>Booth 5B-A01</span></div><div><strong>2024</strong><span>Booth 5B-A03</span></div><div><strong>2023</strong><span>Booth 5B-A01</span></div></div></div><div class="mini-cta"><h4>未能到場？在線延續討論</h4><span>提交項目需求 →</span></div></div></div></div>
+    </div>
+  </section>
+
+  <section class="slide tour-slide" data-title="聯絡方式">
+    <div class="inner tour-grid"><div class="tour-info"><div class="eyebrow reveal">Website tour · 07</div><h2 class="reveal d1">聯絡方式<br />把溝通入口集中</h2><p class="lead reveal d2">電郵、電話、地址、WhatsApp 狀態和完整需求表單在一個清晰頁面內銜接。</p><div class="tour-meta reveal d3"><span>可點郵箱</span><span>一鍵撥號</span><span>地圖入口</span><span>WhatsApp待確認</span></div><code class="tour-route reveal d4">/zh/contact</code></div>
+      <div class="site-window reveal d2"><div class="site-toolbar"><i></i><i></i><i></i><span>yanchuen-demo / zh / contact</span></div><div class="site-viewport"><div class="site-scroll mini-site" style="--travel:-22%"><div class="mini-nav"><img src="{{ASSET:yan-chuen-logo.webp}}" alt="岩泉標誌"/><div class="mini-links"><span>產品</span><span>展覽信息</span><span>關於岩泉</span><span>聯絡方式</span></div><b>提交需求 ↗</b></div><div class="mini-title"><div><span class="mini-kicker">香港聯絡方式</span><h3>聯絡岩泉</h3></div><p>可直接電郵或致電香港辦事處；報價前先整理應用、部件類型與參考資料。</p></div><div class="mini-contact-grid"><article class="mini-contact primary"><small>電郵</small><h4>sales@yanchuen.com</h4><span>一鍵撰寫電郵 →</span></article><article class="mini-contact"><small>電話</small><h4>+852 2688 5011</h4><span>一鍵致電 →</span></article><article class="mini-contact"><small>WhatsApp</small><h4>Demo</h4><span>待甲方確認企業號碼</span></article><article class="mini-contact"><small>地址</small><h4>Yan Chuen Co., Ltd.</h4><span>Fo Tan Industrial Centre · Google Maps ↗</span></article></div><div class="mini-section alt"><div class="mini-head"><h4>詢盤前可先準備</h4><p>產品類型、使用場景、圖紙或樣品、數量、時間與合規要求。</p></div><div class="mini-apps"><div class="mini-app"><strong>產品類型</strong><span>按鍵、橡膠件或組件</span></div><div class="mini-app"><strong>參考資料</strong><span>圖紙、相片或樣品</span></div><div class="mini-app"><strong>項目階段</strong><span>探索、設計或待報價</span></div><div class="mini-app"><strong>目標時間</strong><span>需按實際項目確認</span></div></div></div><div class="mini-cta"><h4>需要完整說明項目？</h4><span>前往需求頁 →</span></div></div></div></div>
+    </div>
+  </section>
+
+  <section class="slide tour-slide" data-title="詢盤AI與後台">
+    <div class="inner tour-grid"><div class="tour-info"><div class="eyebrow reveal">Website tour · 08</div><h2 class="reveal d1">詢盤、AI客服<br />與營運後台</h2><p class="lead reveal d2">前台把需求整理清楚，AI Demo 做常見問題分流，後台示範未來如何觀察到訪與詢盤。</p><div class="tour-meta reveal d3"><span>有圖/無圖</span><span>本地安全 Demo</span><span>AI 需求整理</span><span>數據後台原型</span></div><code class="tour-route reveal d4">/zh/request-a-quote · /admin</code></div>
+      <div class="site-window reveal d2"><div class="site-toolbar"><i></i><i></i><i></i><span>yanchuen-demo / zh / request-a-quote</span></div><div class="site-viewport"><div class="site-scroll mini-site" style="--travel:-43%"><div class="mini-nav"><img src="{{ASSET:yan-chuen-logo.webp}}" alt="岩泉標誌"/><div class="mini-links"><span>產品</span><span>設計指南</span><span>聯絡方式</span><span>後台Demo</span></div><b>提交需求 ↗</b></div><div class="mini-title"><div><span class="mini-kicker">訂製項目需求</span><h3>告訴我們你的項目</h3></div><p>可上傳參考檔案，也可在未有圖紙時先說明應用、結構、字樣與項目階段。</p></div><div class="mini-form-layout"><aside class="mini-notice"><span class="mini-kicker" style="color:#68dda2">本地隔離示範</span><h4>Demo only — 不會傳送需求</h4><ul><li>不會寄出電郵或呼叫CRM</li><li>附件只在瀏覽器內校驗</li><li>不會記錄聯絡資料</li></ul></aside><div class="mini-form"><strong>聯絡資料與項目詳情</strong><div class="mini-fields" style="margin-top:14px"><div class="mini-field"><label>公司 *</label><i></i></div><div class="mini-field"><label>工作電郵 *</label><i></i></div><div class="mini-field"><label>產品類別 *</label><i></i></div><div class="mini-field"><label>項目階段</label><i></i></div><div class="mini-field full"><label>需求說明 *</label><i></i></div></div><button>完成模擬需求 →</button></div></div><div class="mini-section alt"><div class="mini-head"><h4>AI 客服 Demo</h4><p>回答簡單問題、整理需求，再讓客戶選擇真人聯絡入口。</p></div><div class="mini-ai"><div class="mini-chat"><div class="mini-bubble user">我沒有圖紙，可以先討論嗎？</div><div class="mini-bubble">可以。請先說明用途、按鍵數量、尺寸範圍及項目階段；具體工藝由真人確認。</div><div class="mini-bubble user">我想做工業控制面板。</div></div><div class="mini-dashboard"><span class="mini-kicker" style="color:#68dda2">網站營運後台 Demo · 示例數據</span><h4 style="font-size:18px">到訪、內容與詢盤</h4><div class="mini-metrics"><div class="mini-metric"><strong>1,247</strong><small>示例到訪</small></div><div class="mini-metric"><strong>96</strong><small>開始填寫</small></div><div class="mini-metric"><strong>18</strong><small>完成詢盤</small></div></div><div class="mini-chart"><i style="--bar:34%"></i><i style="--bar:58%"></i><i style="--bar:42%"></i><i style="--bar:78%"></i><i style="--bar:66%"></i><i style="--bar:91%"></i></div></div></div></div><div class="mini-cta"><h4>介面原型已完成，真實數據待上線接入</h4><span>查看交付邊界 →</span></div></div></div></div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="雙增長引擎">
+    <div class="inner">
+      <div class="eyebrow reveal">01 · Growth logic</div>
+      <h2 class="reveal d1">不是只把網站<br />重新設計一次</h2>
+      <div class="engine-grid">
+        <article class="engine reveal d2"><span class="engine-num">ENGINE 01</span><h3>讓合適的採購方找到岩泉</h3><p class="small">SEO 與 GEO 把產品、工藝、公司與展會資料組織成搜尋引擎和生成式 AI 可理解的內容。</p><div class="engine-flow"><span>Google</span><span>AI Search</span><b>→</b><span>有效到訪</span></div></article>
+        <article class="engine reveal d3"><span class="engine-num">ENGINE 02</span><h3>讓到訪者更容易轉化</h3><p class="small">產品內容、工程資料、信任證據、詢盤、WhatsApp 與 AI 客服承接到訪意圖。</p><div class="engine-flow"><span>理解</span><span>信任</span><b>→</b><span>有效詢盤</span></div></article>
+      </div>
+      <div class="merge reveal d4"><span>更多合適的到訪</span><b>×</b><span>更高的到訪轉化率</span></div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="原站審計">
+    <div class="inner">
+      <div class="eyebrow reveal">02 · Evidence before design</div>
+      <div class="split"><h2 class="reveal d1">先把原站問題<br />量化，而不是猜</h2><p class="lead reveal d2">我們保留原站已有的 robots、canonical、部分語言標記與產品資產，聚焦修正真正影響理解、抓取與採購路徑的問題。</p></div>
+      <div class="audit-grid">
+        <article class="audit-card reveal d2"><strong>37</strong><p>個公開 HTML 頁面</p><small>.com 英中頁面及 .com.hk 公開入口的審計樣本</small></article>
+        <article class="audit-card reveal d3"><strong>11</strong><p>組中英文標題相同</p><small>不同語言與頁面沒有充分表達各自主題</small></article>
+        <article class="audit-card reveal d4"><strong>14</strong><p>組描述完全相同</p><small>搜尋摘要難以對應各頁採購意圖</small></article>
+        <article class="audit-card reveal d5"><strong>11</strong><p>個工程章節錯連</p><small>矽膠指南連到薄膜指南，而非本頁正確章節</small></article>
+      </div>
+      <p class="audit-note reveal d5">以上為 2026-10-06 公開站點審計證據；37頁是公開頁面清單，不是 Google 收錄量。</p>
+    </div>
+  </section>
+
+  <section class="slide" data-title="SEO調整">
+    <div class="inner">
+      <div class="split">
+        <div><div class="eyebrow reveal">03 · SEO implementation</div><h2 class="reveal d1">從泛泛展示，<br />到可搜尋的主題體系</h2></div>
+        <div class="search-demo reveal d2"><div class="search-query"><i></i><span>custom silicone rubber keypad manufacturer</span></div><div class="search-results"><span><b>產品頁</b>工藝與選項</span><span><b>設計指南</b>12個工程章節</span><span><b>RFQ</b>帶圖或無圖均可</span></div></div>
+      </div>
+      <div class="matrix reveal d2">
+        <div class="matrix-row matrix-head"><span>原站基礎</span><span></span><span>本次已完成</span><span>預期作用</span></div>
+        <div class="matrix-row"><p class="before">多頁中英文標題、描述重複</p><span class="arrow">→</span><p class="after">各頁、各語言獨立 metadata</p><p class="impact">更準確匹配搜尋意圖</p></div>
+        <div class="matrix-row"><p class="before">產品、工藝、公司資料較分散</p><span class="arrow">→</span><p class="after">產品／指南／關於／展會／聯絡獨立頁面</p><p class="impact">建立清晰主題邊界</p></div>
+        <div class="matrix-row"><p class="before">矽膠指南 11 個章節錯連</p><span class="arrow">→</span><p class="after">12 個正確本頁 ID 與深層連結</p><p class="impact">改善抓取與內容發現</p></div>
+        <div class="matrix-row"><p class="before">圖片有 alt，但部分內容圖描述偏弱</p><span class="arrow">→</span><p class="after">具體 alt、明確尺寸、可閱讀正文</p><p class="impact">補足圖片語義與版面穩定</p></div>
+        <div class="matrix-row"><p class="before">購買路徑和語言關係不夠集中</p><span class="arrow">→</span><p class="after">產品 → 指南 → RFQ；canonical＋hreflang 框架</p><p class="impact">連接搜尋入口與轉化出口</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="GEO調整">
+    <div class="inner split">
+      <div>
+        <div class="eyebrow reveal">04 · GEO implementation</div>
+        <h2 class="reveal d1">讓生成式 AI<br />正確理解岩泉</h2>
+        <p class="lead reveal d2">GEO 不是堆砌關鍵詞，而是讓機器更容易回答：岩泉是誰、能做甚麼、依據甚麼。</p>
+        <div class="geo-list reveal d3"><div><b>企業實體清晰</b>統一名稱、香港背景、產品方向與聯絡資料</div><div><b>內容可抽取</b>以標題、短段落、分類和步驟取代純圖片展示</div><div><b>主題頁面獨立</b>產品、工程、工廠、展覽及聯絡各有入口</div><div><b>證據邊界明確</b>公開來源可追溯，未核實內容不包裝成事實</div></div>
+        <div class="geo-disclaimer reveal d4">預期作用：提高被正確理解與引用的機會；不宣稱已被 AI 引用或保證推薦。</div>
+      </div>
+      <div class="geo-orbit reveal d2">
+        <div class="geo-core">YAN CHUEN<br /><small style="font-size:11px;font-weight:700">Entity + Topics + Evidence</small></div>
+        <div class="question q1"><small>WHO</small>岩泉是一家甚麼公司？</div>
+        <div class="question q2"><small>WHAT</small>可以訂製哪些按鍵與橡膠組件？</div>
+        <div class="question q3"><small>HOW</small>有哪些工藝和設計資料？</div>
+        <div class="question q4"><small>WHERE</small>如何聯絡、參展或提交需求？</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="搜尋到詢盤">
+    <div class="inner">
+      <div class="eyebrow reveal">05 · One connected journey</div>
+      <div class="split"><h2 class="reveal d1">每個搜尋入口，<br />都通向下一步</h2><p class="lead reveal d2">SEO/GEO 不停在「被找到」。內部連結將主題理解、工程判斷、企業信任和聯絡行動串成完整路徑。</p></div>
+      <div class="journey">
+        <article class="journey-card reveal d1"><i class="journey-node"></i><h3>搜尋／AI答案</h3><p>採購問題與頁面主題匹配</p><em>ACQUISITION</em></article>
+        <article class="journey-card reveal d2"><i class="journey-node"></i><h3>產品專題</h3><p>產品範圍、工藝與需求準備</p><em>RELEVANCE</em></article>
+        <article class="journey-card reveal d3"><i class="journey-node"></i><h3>工程指南</h3><p>12章可定位的技術參考</p><em>EXPERTISE</em></article>
+        <article class="journey-card reveal d4"><i class="journey-node"></i><h3>信任驗證</h3><p>公司、工廠、來源及展會資訊</p><em>CONFIDENCE</em></article>
+        <article class="journey-card reveal d5"><i class="journey-node"></i><h3>詢盤入口</h3><p>RFQ、電郵、電話及WhatsApp</p><em>CONVERSION</em></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="首頁成果">
+    <div class="inner split">
+      <div>
+        <div class="eyebrow reveal">06 · Homepage outcome</div><h2 class="reveal d1">三秒內回答<br />三個採購問題</h2>
+        <div class="proof-stack reveal d2">
+          <article class="proof"><span class="no">01</span><b>What</b><h3>做甚麼產品？</h3><p>訂製按鍵與橡膠組件，而非抽象企業口號。</p></article>
+          <article class="proof"><span class="no">02</span><b>For whom</b><h3>適合甚麼項目？</h3><p>用應用、工藝和工程資料幫助買家判斷。</p></article>
+          <article class="proof"><span class="no">03</span><b>Next</b><h3>下一步去哪？</h3><p>查看設計資料，或直接提交項目需求。</p></article>
+        </div>
+      </div>
+      <div class="browser reveal d2">
+        <div class="browserbar"><i></i><i></i><i></i></div>
+        <div class="browserbody"><div class="mock-copy"><small>香港 · 訂製輸入組件</small><h3>為設備項目訂製按鍵與橡膠組件</h3><p>從矽膠按鍵、薄膜按鍵、橡膠零件與實用設計資料開始。</p><span class="mock-btn">提交項目需求 →</span></div><div class="mock-img"><img src="{{ASSET:hero-keypad-collection.webp}}" alt="新版首頁產品主視覺" /></div></div>
+        <div class="feature-strip"><span>按項目討論</span><span>未有圖紙也可開始</span><span>工程參考資料</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="內容深度">
+    <div class="inner split">
+      <div class="collage reveal">
+        <figure><img src="{{ASSET:guide-construction.webp}}" alt="矽膠按鍵基本結構參考圖" /><figcaption>12章工程設計指南</figcaption></figure>
+        <figure><img src="{{ASSET:silicone-keypad-multicolor.webp}}" alt="多色矽膠按鍵樣品" /><figcaption>可核實產品與工藝</figcaption></figure>
+        <figure><img src="{{ASSET:factory-production.webp}}" alt="岩泉公開網站展示的生產工序" /><figcaption>15項公開工序照片</figcaption></figure>
+      </div>
+      <div>
+        <div class="eyebrow reveal">07 · Content with engineering depth</div><h2 class="reveal d1">把原有資料，<br />重組為採購內容</h2>
+        <p class="lead reveal d2">產品不只展示樣品，還說明顏色、字樣、導電觸點、雕刻、包膠、表面處理及買家需要準備甚麼。</p>
+        <div class="fact-row reveal d3"><div><strong>6</strong><span>個公開產品類別</span></div><div><strong>12</strong><span>個可定位工程章節</span></div><div><strong>15</strong><span>張具名工序照片</span></div></div>
+        <p class="small reveal d4">不自行增加 MOQ、交期、壽命、IP 等級或未核實認證；具體條件留待項目確認。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="信任體系">
+    <div class="inner">
+      <div class="eyebrow reveal">08 · Trust architecture</div>
+      <div class="split"><h2 class="reveal d1">信任，不靠<br />虛構客戶好評</h2><p class="lead reveal d2">以可核實企業資料、工廠工序、第三方報導和展會記錄建立信任；客戶評價區只保留為待甲方提供授權內容的位置。</p></div>
+      <div class="proof-stack">
+        <article class="proof reveal d2"><span class="no">A</span><b>Company</b><h3>獨立「關於岩泉」</h3><p>整合 HKTDC 公司檔案、1992年成立資料、產品與公開能力邊界。</p></article>
+        <article class="proof reveal d3"><span class="no">B</span><b>Factory tour</b><h3>工序而非口號</h3><p>混煉、成型、印刷、雷雕、塗層、滴膠、薄膜印刷、模切與貼合等公開照片。</p></article>
+        <article class="proof reveal d4"><span class="no">C</span><b>Trade shows</b><h3>展覽資訊獨立</h3><p>展示 electronicAsia 2023–2025 記錄及已公開的 2026 展位，並保留來源。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="雙語國際化">
+    <div class="inner">
+      <div class="eyebrow reveal">09 · Bilingual discovery</div>
+      <div class="split"><h2 class="reveal d1">不是切換文字，<br />而是兩套完整入口</h2><p class="lead reveal d2">英文與香港繁體中文擁有對應頁面、獨立標題和描述，切換語言時保留當前產品與詢盤上下文。</p></div>
+      <div class="lang-grid">
+        <article class="lang-panel reveal d2"><span class="lang-code">EN · GLOBAL BUYER</span><h3>Custom keypads & rubber components</h3><ul><li>Independent title & description</li><li>Product → Guide → RFQ</li><li>English contact and trade-show pages</li></ul></article>
+        <article class="lang-panel reveal d3"><span class="lang-code">ZH-HANT-HK · 香港採購語境</span><h3>訂製按鍵與橡膠組件</h3><ul><li>香港繁體中文內容與術語</li><li>對應產品、指南、關於及聯絡頁</li><li>Open Graph locale：zh_HK</li></ul></article>
+      </div>
+      <div class="hreflang reveal d4">canonical + reciprocal hreflang：en ↔ zh-Hant　·　正式域名確認後啟用生產值</div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="詢盤轉化">
+    <div class="inner">
+      <div class="eyebrow reveal">10 · Conversion system</div>
+      <div class="split"><h2 class="reveal d1">每一個「有興趣」，<br />都有明確出口</h2><p class="lead reveal d2">聯絡頁、應用卡、產品頁和工程指南不再停在閱讀；它們分別把需求帶往可點擊聯絡方式或預填詢盤。</p></div>
+      <div class="conversion-map reveal d3">
+        <div class="contact-card"><h3>直接聯絡</h3><div class="contact-item"><b>EMAIL</b><span>一點開啟郵件<br /><small>使用已確認企業郵箱</small></span></div><div class="contact-item"><b>PHONE</b><span>一點撥號<br /><small>香港辦事處電話</small></span></div><div class="contact-item"><b>WHATSAPP</b><span>確認企業號碼後接通<br /><small>Demo 明確標示佔位</small></span></div></div>
+        <div class="handoff">→</div>
+        <div class="rfq-mini"><h3>Tell us about your project</h3><label>產品類別</label><i></i><label>應用／項目階段</label><i></i><label>需求說明</label><i style="height:64px"></i><button>完成本地 Demo →</button></div>
+      </div>
+      <div class="conversion-notes reveal d4"><div><b>有圖紙</b>可選 PDF／PNG／JPG</div><div><b>未有圖紙</b>也可用應用與需求開始</div><div><b>安全邊界</b>Demo 不上傳、不傳送、不儲存</div></div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="AI與後台Demo">
+    <div class="inner">
+      <div class="eyebrow reveal">11 · Future operating layer</div>
+      <div class="split"><h2 class="reveal d1">網站不只發布，<br />還要能持續運營</h2><p class="lead reveal d2">本次加入兩個清楚標示的原型：AI客服示範簡單需求分流；後台示範未來如何查看到訪、內容和詢盤。</p></div>
+      <div class="demo-grid">
+        <article class="demo-panel reveal d2"><span class="tag">AI客服 Demo · 不真實傳送</span><h3 style="margin-top:24px">先回答常見問題，再交給真人</h3><div class="chat"><div class="bubble user">我沒有圖紙，可以先討論嗎？</div><div class="bubble">可以。請先說明產品用途、按鍵數量、尺寸範圍及項目階段；具體工藝仍由工程人員確認。</div><div class="bubble user">我想做工業控制面板。</div></div></article>
+        <article class="demo-panel reveal d3"><span class="tag">Operations dashboard · Sample data</span><h3 style="margin-top:24px">把曝光、內容與詢盤放在同一視圖</h3><div class="metric-row"><div class="metric"><strong>—</strong><span>真實到訪待接入</span></div><div class="metric"><strong>—</strong><span>有效詢盤待接入</span></div><div class="metric"><strong>—</strong><span>轉化率待接入</span></div></div><div class="bars"><i style="--h:58%"></i><i style="--h:83%"></i><i style="--h:42%"></i><i style="--h:72%"></i><i style="--h:95%"></i><i style="--h:66%"></i><i style="--h:80%"></i></div><p class="small" style="margin-top:18px">目前只展示介面，不收集真實流量或詢盤。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" data-title="上線邊界">
+    <div class="inner">
+      <div class="eyebrow reveal">12 · Honest delivery status</div>
+      <div class="split"><h2 class="reveal d1">把已完成、<br />待上線、未取得分開</h2><p class="lead reveal d2">Demo 能證明結構、內容與流程已落地；不能把尚未發生的排名、AI引用、流量或詢盤增長寫成成果。</p></div>
+      <div class="status-columns">
+        <article class="status reveal d2"><h3>已完成</h3><ul><li>英中獨立 metadata 與可讀正文</li><li>產品、指南、關於、展會、聯絡頁</li><li>canonical／hreflang／Open Graph 框架</li><li>內部連結、麵包屑、圖片描述</li><li>本地詢盤、AI客服及後台 Demo</li></ul></article>
+        <article class="status reveal d3"><h3>正式上線時啟用</h3><ul><li>確認主域名與生產網址</li><li>解除公開頁 noindex</li><li>sitemap、301 舊網址映射</li><li>經甲方核實的結構化資料</li><li>Search Console、GA4及詢盤事件</li></ul></article>
+        <article class="status reveal d4"><h3>仍需數據驗證</h3><ul><li>關鍵詞排名與收錄變化</li><li>是否被生成式 AI 引用</li><li>真實 Core Web Vitals</li><li>有效到訪與詢盤基線</li><li>上線後的轉化與業務結果</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide final" data-title="結語">
+    <div class="inner">
+      <div class="eyebrow reveal">13 · The outcome</div>
+      <h2 class="reveal d1">從一份線上產品目錄，<br />到一個<span>可被發現、理解、信任</span><br />並持續產生詢盤的<br />數字業務入口。</h2>
+      <div class="final-grid reveal d2"><div><small>01 · ACQUIRE</small><b>SEO／GEO 提高合適到訪機會</b></div><div><small>02 · CONVINCE</small><b>產品、工程、企業證據建立信任</b></div><div><small>03 · CONVERT</small><b>聯絡、RFQ、AI客服承接需求</b></div></div>
+      <div class="final-foot reveal d3"><div><strong>Yan Chuen Website Redesign Demo</strong><br /><a href="mailto:maoqin1979@gmail.com" style="color:inherit">maoqin1979@gmail.com</a> · <a href="tel:+85254187719" style="color:inherit">+852 5418 7719</a> · <a href="https://wa.me/85254187719" target="_blank" rel="noreferrer" style="color:inherit">WhatsApp</a></div><div>按 ← → 瀏覽 · Space 暫停／播放 · F 全屏</div></div>
+    </div>
+  </section>
+
+  <nav class="controls" aria-label="演示控制">
+    <button class="control-btn" id="prev" aria-label="上一頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+    <button class="control-btn" id="play" aria-label="暫停自動播放"><svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5h3v14H8zm5 0h3v14h-3z"/></svg></button>
+    <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+    <div class="dots" id="dots" aria-label="頁面索引"></div>
+    <button class="control-btn" id="next" aria-label="下一頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+    <button class="control-btn active" id="music" aria-label="關閉背景音樂" title="背景音樂（M）"><svg id="musicIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg></button>
+    <button class="control-btn" id="fullscreen" aria-label="進入全屏"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg></button>
+  </nav>
+  <div class="toast" id="toast" role="status"></div>
+</main>
+<audio id="bgm" preload="auto" loop src="{{ASSET:gentle-ambient-meeting.mp3}}"></audio>
+<script>
+(() => {
+  const slides=[...document.querySelectorAll('.slide')], dots=document.getElementById('dots');
+  const currentNo=document.getElementById('currentNo'), progress=document.getElementById('progress'), playBtn=document.getElementById('play'), musicBtn=document.getElementById('music'), toast=document.getElementById('toast');
+  const duration=10500; let index=0, playing=true, timer, started=performance.now(), remaining=duration;
+  const bgm=document.getElementById('bgm');let musicWanted=true, musicStarted=false;bgm.volume=.55;
+  document.getElementById('totalNo').textContent=String(slides.length).padStart(2,'0');
+  slides.forEach((slide,i)=>{const b=document.createElement('button');b.className='dot'+(i===0?' active':'');b.setAttribute('aria-label',`${i+1}. ${slide.dataset.title}`);b.onclick=()=>go(i);dots.appendChild(b)});
+  const dotList=[...dots.children];
+  function icon(){document.getElementById('playIcon').innerHTML=playing?'<path d="M8 5h3v14H8zm5 0h3v14h-3z"/>':'<path d="m8 5 11 7-11 7z"/>';playBtn.setAttribute('aria-label',playing?'暫停自動播放':'開始自動播放')}
+  function schedule(ms=duration){clearTimeout(timer);remaining=ms;started=performance.now();if(playing) timer=setTimeout(()=>go((index+1)%slides.length),ms)}
+  function go(next){if(next===index)return schedule();const old=slides[index];old.classList.add('exit');old.classList.remove('active');index=(next+slides.length)%slides.length;slides[index].classList.add('active');slides[index].classList.remove('exit');setTimeout(()=>old.classList.remove('exit'),800);currentNo.textContent=String(index+1).padStart(2,'0');progress.style.width=`${((index+1)/slides.length)*100}%`;dotList.forEach((d,i)=>d.classList.toggle('active',i===index));schedule();document.title=`${index+1}/${slides.length} · ${slides[index].dataset.title}｜岩泉官網重構`}
+  function toggle(){if(playing){remaining=Math.max(600,duration-(performance.now()-started));playing=false;clearTimeout(timer);show('已暫停')}else{playing=true;schedule(remaining);show('繼續播放')}icon()}
+  function show(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1200)}
+  function updateMusicButton(){musicBtn.classList.toggle('active',musicWanted);musicBtn.setAttribute('aria-label',musicWanted?'關閉背景音樂':'開啟背景音樂');musicBtn.title=musicWanted?'關閉背景音樂（M）':'開啟背景音樂（M）'}
+  async function ensureMusic(){if(!musicWanted||musicStarted&&!bgm.paused)return;try{await bgm.play();musicStarted=true}catch{}}
+  async function toggleMusic(){musicWanted=!musicWanted;updateMusicButton();if(musicWanted){await ensureMusic();show(bgm.paused?'請再點一下以播放背景音樂':'背景音樂已開啟')}else{bgm.pause();show('背景音樂已關閉')}}
+  bgm.addEventListener('error',()=>{musicWanted=false;updateMusicButton();show('背景音樂載入失敗')});
+  document.getElementById('prev').onclick=()=>go(index-1);document.getElementById('next').onclick=()=>go(index+1);playBtn.onclick=toggle;
+  musicBtn.onclick=toggleMusic;
+  document.getElementById('fullscreen').onclick=()=>{ensureMusic();if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()};
+  addEventListener('keydown',e=>{ensureMusic();if(['ArrowRight','PageDown'].includes(e.key))go(index+1);if(['ArrowLeft','PageUp'].includes(e.key))go(index-1);if(e.code==='Space'){e.preventDefault();toggle()}if(e.key.toLowerCase()==='m')toggleMusic();if(e.key.toLowerCase()==='f')document.getElementById('fullscreen').click();if(e.key==='Home')go(0);if(e.key==='End')go(slides.length-1)});
+  addEventListener('pointerdown',ensureMusic,{once:true});
+  let x=0;addEventListener('pointerdown',e=>x=e.clientX);addEventListener('pointerup',e=>{const dx=e.clientX-x;if(Math.abs(dx)>70)go(index+(dx<0?1:-1))});
+  progress.style.width=`${100/slides.length}%`;icon();updateMusicButton();schedule();ensureMusic();
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){playing=false;clearTimeout(timer);icon();}
+})();
+</script>
+</body>
+</html>
