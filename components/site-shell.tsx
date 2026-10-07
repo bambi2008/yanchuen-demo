@@ -36,6 +36,7 @@ export function SiteShell({ lang, path, children, quietNav = false }: ShellProps
               <Link href={localPath(lang, "/products")}>{t.products}</Link>
               <Link href={localPath(lang, "/design-guides/silicone-rubber-keypad")}>{t.guide}</Link>
               <Link href={`${localPath(lang)}#manufacturing`}>{t.manufacturing}</Link>
+              <Link href={localPath(lang, "/trade-shows")}>{t.tradeShows}</Link>
               <Link href={localPath(lang, "/about")}>{t.about}</Link>
               <Link href={localPath(lang, "/contact")}>{t.contact}</Link>
             </nav>
@@ -59,6 +60,7 @@ export function SiteShell({ lang, path, children, quietNav = false }: ShellProps
                 <Link href={localPath(lang, "/products")}>{t.products}</Link>
                 <Link href={localPath(lang, "/design-guides/silicone-rubber-keypad")}>{t.guide}</Link>
                 <Link href={`${localPath(lang)}#manufacturing`}>{t.manufacturing}</Link>
+                <Link href={localPath(lang, "/trade-shows")}>{t.tradeShows}</Link>
                 <Link href={localPath(lang, "/about")}>{t.about}</Link>
                 <Link href={localPath(lang, "/contact")}>{t.contact}</Link>
                 <Link href={localPath(lang, "/request-a-quote")}>{t.rfq}</Link>
@@ -92,6 +94,7 @@ function Footer({ lang }: { lang: Lang }) {
           <h2>{isZh ? "採購入口" : "Purchasing"}</h2>
           <Link href={localPath(lang, "/products")}>{isZh ? "瀏覽產品" : "Browse products"}</Link>
           <Link href={localPath(lang, "/design-guides/silicone-rubber-keypad")}>{isZh ? "矽膠按鍵設計指南" : "Silicone keypad design guide"}</Link>
+          <Link href={localPath(lang, "/trade-shows")}>{isZh ? "展覽信息" : "Trade shows"}</Link>
           <Link href={localPath(lang, "/request-a-quote")}>{isZh ? "提交項目需求" : "Share project requirements"}</Link>
         </div>
         <div>

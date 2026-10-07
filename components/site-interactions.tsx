@@ -21,6 +21,8 @@ const revealSelector = [
   ".about-stat",
   ".about-capability-card",
   ".trade-show-grid > *",
+  ".trade-prep-grid article",
+  ".trade-history-grid article",
 ].join(",");
 
 export function SiteInteractions({ path }: { path: string }) {
