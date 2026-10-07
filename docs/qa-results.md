@@ -13,6 +13,7 @@ Test date: 2026-10-07 (Asia/Shanghai). This file records executed checks and doe
 ## Browser checks
 
 - 390px, 768px and 1440px: **passed** across all 11 routes. Browser audit found one H1 per page, zero empty links and no horizontal overflow.
+- Header brand lockup: **passed** at desktop and 390px mobile widths. The original logo asset and lettering remain unchanged; the desktop supporting label hides cleanly on smaller screens.
 - English and Traditional Chinese document language: **passed** (`en` and `zh-Hant-HK` respectively).
 - Traditional Chinese localisation: **passed** for Hong Kong-facing terminology, `zh-Hant` reciprocal hreflang, `zh_HK` Open Graph locale, language switch labels and Traditional Chinese metadata.
 - Page-specific title and `noindex, nofollow, noarchive`: **passed** across every route.
