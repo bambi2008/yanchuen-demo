@@ -1,0 +1,72 @@
+{
+  "ledgerVersion": "1.0",
+  "researchDate": "2026-10-06",
+  "verifiedOn": "2026-10-07",
+  "facts": [
+    {
+      "id": "fact-product-range",
+      "sourceUrl": "https://www.yanchuen.com/products",
+      "status": "public-source",
+      "evidence": "Public product pages list silicone rubber keypads, membrane keypads, rubber parts, keypad kitsets / P+R / assemblies, elastomeric connectors and silicone tubing.",
+      "use": ["/", "/products", "/zh", "/zh/products"],
+      "boundary": "Product range only; not sales mix, volume or revenue share. Silicone tubing needs further source review before a dedicated page."
+    },
+    {
+      "id": "fact-silicone-customization",
+      "sourceUrl": "https://www.yanchuen.com/silicone-rubber-keypad",
+      "status": "public-source",
+      "evidence": "Public product content and samples describe multi-color bases and printing, conductive pills, laser etching, plastic / metal overmolding and several finish examples.",
+      "use": ["/silicone-rubber-keypad", "/zh/silicone-rubber-keypad"],
+      "boundary": "Each item is a discussion capability supported by a page or sample; no durability, life, MOQ, price or lead-time guarantee is inferred."
+    },
+    {
+      "id": "fact-design-reference",
+      "sourceUrl": "https://www.yanchuen.com/copy-of-membrane-keypad-design",
+      "status": "public-source",
+      "evidence": "The page contains construction, conductive design, assembly, printing, special construction, life-test, force/stroke, tolerance and key-section reference images.",
+      "use": ["/design-guides/silicone-rubber-keypad", "/zh/design-guides/silicone-rubber-keypad"],
+      "boundary": "Images are presented as references. Values are not transcribed into universal specifications."
+    },
+    {
+      "id": "fact-applications",
+      "sourceUrl": "https://www.yanchuen.com/",
+      "status": "public-source",
+      "evidence": "The public site names telecom, security, medical, machinery, home appliance and related application areas.",
+      "use": ["/", "/silicone-rubber-keypad", "/request-a-quote"],
+      "boundary": "Application direction only; it does not prove certification or current customer relationships in those fields."
+    },
+    {
+      "id": "fact-facilities",
+      "sourceUrl": "https://www.yanchuen.com/about-us",
+      "secondaryUrl": "https://www.yanchuen.com/projects-2",
+      "status": "needs-client-confirmation",
+      "evidence": "The public site identifies rubber-production facilities in Wan’an, Jiangxi and membrane-production facilities in Huangjiang, Dongguan and shows process photographs.",
+      "use": ["/#manufacturing", "/zh#manufacturing"],
+      "boundary": "Ownership, operating relationship and certification scope are not stated; the demo does not say owned factory or outsourced partner."
+    },
+    {
+      "id": "fact-history",
+      "sourceUrl": "https://sourcing.hktdc.com/en/Supplier-Store/Profile/Yan-Chuen-Co-Ltd/1X0008MQ",
+      "status": "public-source",
+      "evidence": "HKTDC supplier profile lists Yan Chuen Co., Ltd. as established in 1992 and serving export markets.",
+      "use": ["/#about", "/zh#about"],
+      "boundary": "Public-record context only; no customer count, export share or market-share calculation."
+    },
+    {
+      "id": "fact-channel-coverage",
+      "sourceUrl": "https://www.activecomponents.com/articles/news/1104",
+      "status": "public-source",
+      "evidence": "Active Components published a Yan Chuen custom keypad and overlay introduction dated 2024-06-27.",
+      "use": ["/#about", "/zh#about"],
+      "boundary": "Presented as industry/channel coverage, not a testimonial or proof of a customer relationship."
+    },
+    {
+      "id": "audit-public-site-20261006",
+      "sourceUrl": "proposal://supplied-research-2026-10-06",
+      "status": "proposal",
+      "evidence": "37 unique public HTML pages were identified; 11 of 14 bilingual pairs shared titles, all 14 shared descriptions, four design-guide pages lacked H1, and 11 silicone-guide chapter links pointed to the membrane guide.",
+      "use": ["/proposal"],
+      "boundary": "A dated public-site crawl, not Google index count or proof that all SEO foundations are absent."
+    }
+  ]
+}

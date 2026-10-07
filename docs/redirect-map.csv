@@ -1,0 +1,12 @@
+old_url,new_url,handling,status_or_question
+https://www.yanchuen.com/,/,one-to-one 301 after production approval,proposed
+https://www.yanchuen.com/zh,/zh,one-to-one 301 after production approval,proposed
+https://www.yanchuen.com/products,/products,preserve path,proposed
+https://www.yanchuen.com/zh/products,/zh/products,preserve path,proposed
+https://www.yanchuen.com/silicone-rubber-keypad,/silicone-rubber-keypad,preserve path,proposed
+https://www.yanchuen.com/zh/silicone-rubber-keypad,/zh/silicone-rubber-keypad,preserve path,proposed
+https://www.yanchuen.com/copy-of-membrane-keypad-design,/design-guides/silicone-rubber-keypad,topic-correct 301,proposed
+https://www.yanchuen.com/zh/copy-of-membrane-keypad-design,/zh/design-guides/silicone-rubber-keypad,topic-correct 301,proposed
+https://www.yanchuen.com/copy-of-design-reference,/design-guides/membrane-keypad,reserve for future membrane guide,do not redirect to silicone or home
+https://www.yanchuen.com/zh/copy-of-design-reference,/zh/design-guides/membrane-keypad,reserve for future membrane guide,do not redirect to silicone or home
+https://www.yanchuen.com/contact,/request-a-quote,map only after checking other contact-page uses,pending review
